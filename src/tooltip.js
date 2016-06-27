@@ -1,8 +1,8 @@
-import {default as constant} from "./constant";
+import {constant} from "d3plus-common";
 import {select as d3Select} from "d3-selection";
 
 function tooltipId(d, i) {
-  return i;
+  return `${i}`;
 }
 
 function tooltipTranslate(d) {
