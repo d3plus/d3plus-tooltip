@@ -223,6 +223,23 @@ function value(d) {
 
   /**
       @memberof tooltip
+      @desc If *value* is specified, sets the methods that correspond to the key/value pairs and returns this generator. If *value* is not specified, returns the current configuration.
+      @param {Object} [*value*]
+  */
+  tooltip.config = function(_) {
+    if (arguments.length) {
+      for (const k in _) if ({}.hasOwnProperty.call(_, k)) tooltip[k](_[k]);
+      return tooltip;
+    }
+    else {
+      const config = {};
+      for (const k in tooltip.prototype.constructor) if (k !== "config" && {}.hasOwnProperty.call(tooltip, k)) config[k] = tooltip[k]();
+      return config;
+    }
+  };
+
+  /**
+      @memberof tooltip
       @desc If *data* is specified, sets the data array to the specified array and returns this generator. If *data* is not specified, returns the current data array.
       @param {Array} [*data* = []]
   */
