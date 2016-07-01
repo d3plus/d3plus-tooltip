@@ -1,5 +1,10 @@
 import {accessor, constant, stylize} from "d3plus-common";
+import {default as prefix} from "./prefix";
 import {select} from "d3-selection";
+import {transition} from "d3-transition";
+const d3 = {
+  select, transition
+};
 
 /**
     The default id accessor function.
@@ -25,16 +30,39 @@ function tooltipTranslate(d) {
 export default function(data = []) {
 
   /**
+      Sets styles for both enter and update.
+      @private
+  */
+  function boxStyles(box) {
+    box
+      .style("padding", padding)
+      .style("width", width)
+      .style("height", height)
+      .style("border", function(d, i) {
+        const b = d3.select(this).style("border");
+        return b !== "0px none rgb(0, 0, 0)" ? b : border(d, i);
+      })
+      .style("top", function(d, i) {
+        return `${translate(d, i)[1] - this.offsetHeight - offset(d, i)}px`;
+      })
+      .style("left", function(d, i) {
+        return `${translate(d, i)[0] - this.offsetWidth / 2}px`;
+      });
+  }
+
+  /**
       Fetches table contents given functions or values.
       @private
   */
   function cellContent(d) {
     if (typeof d === "function") {
-      const datum = select(this.parentNode.parentNode).datum();
+      const datum = d3.select(this.parentNode.parentNode).datum();
       return d(datum, data.indexOf(datum));
     }
     else return d;
   }
+
+  const pre = prefix();
 
   let body = accessor("body", ""),
       bodyStyle = {
@@ -43,6 +71,7 @@ export default function(data = []) {
       },
       border = constant("1px solid #444"),
       className = "d3plus-tooltip",
+      duration = constant(200),
       footer = accessor("footer", ""),
       footerStyle = {
         "font-size": "10px",
@@ -81,12 +110,14 @@ export default function(data = []) {
   */
   function tooltip(callback) {
 
-    const tooltips = select("body").selectAll(`.${className}`)
+    const tooltips = d3.select("body").selectAll(`.${className}`)
       .data(data, id);
 
     const enter = tooltips.enter().append("div")
       .attr("class", className)
-      .style("position", "absolute");
+      .style("position", "absolute")
+      .style(`${pre}transform`, "scale(0)")
+      .style(`${pre}transform-origin`, "50% 100%");
 
     const update = tooltips.merge(enter);
 
@@ -126,23 +157,18 @@ export default function(data = []) {
 
     divElement("footer");
 
+    enter.call(boxStyles);
+
     update
       .attr("id", (d, i) => `d3plus-tooltip-${id(d, i)}`)
-      .style("padding", padding)
-      .style("width", width)
-      .style("height", height)
-      .style("border", function(d, i) {
-        const b = select(this).style("border");
-        return b !== "0px none rgb(0, 0, 0)" ? b : border(d, i);
-      })
-      .style("top", function(d, i) {
-        return `${translate(d, i)[1] - this.offsetHeight - offset(d, i)}px`;
-      })
-      .style("left", function(d, i) {
-        return `${translate(d, i)[0] - this.offsetWidth / 2}px`;
-      });
+      .transition().duration(duration)
+        .style(`${pre}transform`, "scale(1)")
+        .call(boxStyles);
 
-    tooltips.exit().remove();
+    tooltips.exit()
+      .transition().duration(duration)
+      .style(`${pre}transform`, "scale(0)")
+      .remove();
 
     if (callback) setTimeout(callback, 100);
 
@@ -202,6 +228,15 @@ function value(d) {
   */
   tooltip.data = function(_) {
     return arguments.length ? (data = _, tooltip) : data;
+  };
+
+  /**
+      @memberof tooltip
+      @desc If *ms* is specified, sets the duration accessor to the specified function or number and returns this generator. If *ms* is not specified, returns the current duration accessor.
+      @param {Function|Number} [*ms* = 200]
+  */
+  tooltip.duration = function(_) {
+    return arguments.length ? (duration = typeof _ === "function" ? _ : constant(_), tooltip) : duration;
   };
 
   /**
