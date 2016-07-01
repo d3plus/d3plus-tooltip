@@ -5,7 +5,7 @@
   "main": "build/d3plus-tooltip.js",
   "jsnext:main": "index",
   "license": "MIT",
-  "homepage": "http://www.d3plus.org",
+  "homepage": "https://d3plus.org",
   "repository": {
     "type": "git",
     "url": "https://github.com/d3plus/d3plus-tooltip.git"
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "d3-selection": "^1.0.0",
-    "d3plus-common": "^0.3.7"
+    "d3plus-common": "^0.4.2"
   },
   "scripts": {
     "dev": "d3plus-dev",

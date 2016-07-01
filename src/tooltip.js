@@ -1,13 +1,5 @@
-import {accessor, constant} from "d3plus-common";
+import {accessor, constant, stylize} from "d3plus-common";
 import {select} from "d3-selection";
-
-/**
-    Applies each key/value in an object as a style.
-    @private
-*/
-function applyStyles(e, s) {
-  for (const k in s) if ({}.hasOwnProperty.call(s, k)) e.style(k, s[k]);
-}
 
 /**
     The default id accessor function.
@@ -105,7 +97,7 @@ export default function(data = []) {
     function divElement(cat) {
       enter.append("div").attr("class", `d3plus-tooltip-${cat}`);
       const div = update.select(`.d3plus-tooltip-${cat}`).html(eval(cat));
-      applyStyles(div, eval(`${cat}Style`));
+      stylize(div, eval(`${cat}Style`));
     }
 
     divElement("title");
@@ -113,18 +105,18 @@ export default function(data = []) {
 
     const tableEnter = enter.append("table").attr("class", "d3plus-tooltip-table");
     const table = update.select(".d3plus-tooltip-table");
-    applyStyles(table, tableStyle);
+    stylize(table, tableStyle);
 
     tableEnter.append("thead").attr("class", "d3plus-tooltip-thead");
     const tableHead = update.select(".d3plus-tooltip-thead");
-    applyStyles(tableHead, theadStyle);
+    stylize(tableHead, theadStyle);
     const th = tableHead.selectAll("th").data(thead);
     th.enter().append("th").merge(th).html(cellContent);
     th.exit().remove();
 
     tableEnter.append("tbody").attr("class", "d3plus-tooltip-tbody");
     const tableBody = update.select(".d3plus-tooltip-tbody");
-    applyStyles(tableBody, tbodyStyle);
+    stylize(tableBody, tbodyStyle);
     const tr = tableBody.selectAll("tr").data(tbody);
     const trEnter = tr.enter().append("tr");
     tr.exit().remove();
