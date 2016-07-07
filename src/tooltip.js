@@ -36,6 +36,7 @@ export default function(data = []) {
   function boxStyles(box) {
     box
       .style("background", background)
+      .style(`${pre}border-radius`, borderRadius)
       .style("padding", padding)
       .style("width", width)
       .style("height", height)
@@ -72,6 +73,7 @@ export default function(data = []) {
         "font-weight": "400"
       },
       border = constant("1px solid rgba(0, 0, 0, 0.1)"),
+      borderRadius = constant("2px"),
       className = "d3plus-tooltip",
       duration = constant(200),
       footer = accessor("footer", ""),
@@ -221,6 +223,15 @@ function value(d) {
   */
   tooltip.border = function(_) {
     return arguments.length ? (border = typeof _ === "function" ? _ : constant(_), tooltip) : border;
+  };
+
+  /**
+      @memberof tooltip
+      @desc If *value* is specified, sets the border-radius accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current border-radius accessor.
+      @param {Function|String} [*value* = "1px solid #444"]
+  */
+  tooltip.borderRadius = function(_) {
+    return arguments.length ? (borderRadius = typeof _ === "function" ? _ : constant(_), tooltip) : borderRadius;
   };
 
   /**
