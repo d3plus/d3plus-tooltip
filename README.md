@@ -68,6 +68,7 @@ Creates HTML tooltips in the body of a webpage. If *data* is specified, immediat
     * [.id([*value*])](#tooltip.id)
     * [.offset([*value*])](#tooltip.offset)
     * [.padding([*value*])](#tooltip.padding)
+    * [.pointerEvents([*value*])](#tooltip.pointerEvents)
     * [.tableStyle([*value*])](#tooltip.tableStyle)
     * [.tbody([*value*])](#tooltip.tbody)
     * [.tbodyStyle([*value*])](#tooltip.tbodyStyle)
@@ -87,7 +88,7 @@ If *value* is specified, sets the background accessor to the specified function 
 
 | Param | Type | Default |
 | --- | --- | --- |
-| [*value*] | <code>function</code> &#124; <code>String</code> | <code>&quot;1px solid #444&quot;</code> | 
+| [*value*] | <code>function</code> &#124; <code>String</code> | <code>&quot;rgba(255, 255, 255, 0.75)&quot;</code> | 
 
 <a name="tooltip.body"></a>
 
@@ -133,7 +134,7 @@ If *value* is specified, sets the border accessor to the specified function or s
 
 | Param | Type | Default |
 | --- | --- | --- |
-| [*value*] | <code>function</code> &#124; <code>String</code> | <code>&quot;1px solid #444&quot;</code> | 
+| [*value*] | <code>function</code> &#124; <code>String</code> | <code>&quot;1px solid rgba(0, 0, 0, 0.1)&quot;</code> | 
 
 <a name="tooltip.borderRadius"></a>
 
@@ -144,7 +145,7 @@ If *value* is specified, sets the border-radius accessor to the specified functi
 
 | Param | Type | Default |
 | --- | --- | --- |
-| [*value*] | <code>function</code> &#124; <code>String</code> | <code>&quot;1px solid #444&quot;</code> | 
+| [*value*] | <code>function</code> &#124; <code>String</code> | <code>&quot;2px&quot;</code> | 
 
 <a name="tooltip.className"></a>
 
@@ -256,13 +257,13 @@ function value(d, i) {
 <a name="tooltip.offset"></a>
 
 ### tooltip.offset([*value*])
-If *value* is specified, sets the offset accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current offset accessor.
+If *value* is specified, sets the offset accessor to the specified function or number and returns this generator. If *value* is not specified, returns the current offset accessor.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
 
 | Param | Type | Default |
 | --- | --- | --- |
-| [*value*] | <code>function</code> &#124; <code>String</code> | <code>&quot;5px&quot;</code> | 
+| [*value*] | <code>function</code> &#124; <code>Number</code> | <code>10</code> | 
 
 <a name="tooltip.padding"></a>
 
@@ -274,6 +275,17 @@ If *value* is specified, sets the padding accessor to the specified function or 
 | Param | Type | Default |
 | --- | --- | --- |
 | [*value*] | <code>function</code> &#124; <code>String</code> | <code>&quot;5px&quot;</code> | 
+
+<a name="tooltip.pointerEvents"></a>
+
+### tooltip.pointerEvents([*value*])
+If *value* is specified, sets the pointer-events accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current pointer-events accessor.
+
+**Kind**: static method of <code>[tooltip](#tooltip)</code>  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| [*value*] | <code>function</code> &#124; <code>String</code> | <code>&quot;auto&quot;</code> | 
 
 <a name="tooltip.tableStyle"></a>
 
