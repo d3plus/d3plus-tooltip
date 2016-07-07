@@ -84,7 +84,7 @@ export default function(data = []) {
       },
       height = constant("auto"),
       id = tooltipId,
-      offset = constant(5),
+      offset = constant(10),
       padding = constant("5px"),
       pointerEvents = constant("auto"),
       tableStyle = {
@@ -331,8 +331,8 @@ function value(d, i) {
 
   /**
       @memberof tooltip
-      @desc If *value* is specified, sets the offset accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current offset accessor.
-      @param {Function|String} [*value* = "5px"]
+      @desc If *value* is specified, sets the offset accessor to the specified function or number and returns this generator. If *value* is not specified, returns the current offset accessor.
+      @param {Function|Number} [*value* = 10]
   */
   tooltip.offset = function(_) {
     return arguments.length ? (offset = typeof _ === "function" ? _ : constant(_), tooltip) : offset;
