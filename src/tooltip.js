@@ -35,6 +35,7 @@ export default function(data = []) {
   */
   function boxStyles(box) {
     box
+      .style("background", background)
       .style("padding", padding)
       .style("width", width)
       .style("height", height)
@@ -64,12 +65,13 @@ export default function(data = []) {
 
   const pre = prefix();
 
-  let body = accessor("body", ""),
+  let background = constant("rgba(255, 255, 255, 0.75)"),
+      body = accessor("body", ""),
       bodyStyle = {
         "font-size": "10px",
         "font-weight": "400"
       },
-      border = constant("1px solid #444"),
+      border = constant("1px solid rgba(0, 0, 0, 0.1)"),
       className = "d3plus-tooltip",
       duration = constant(200),
       footer = accessor("footer", ""),
@@ -175,6 +177,15 @@ export default function(data = []) {
     return tooltip;
 
   }
+
+  /**
+      @memberof tooltip
+      @desc If *value* is specified, sets the background accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current background accessor.
+      @param {Function|String} [*value* = "1px solid #444"]
+  */
+  tooltip.background = function(_) {
+    return arguments.length ? (background = typeof _ === "function" ? _ : constant(_), tooltip) : background;
+  };
 
   /**
       @memberof tooltip
