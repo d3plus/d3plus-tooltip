@@ -53,9 +53,11 @@ Creates HTML tooltips in the body of a webpage. If *data* is specified, immediat
 
 
 * [tooltip([data])](#tooltip)
+    * [.background([*value*])](#tooltip.background)
     * [.body([*value*])](#tooltip.body)
     * [.bodyStyle([*value*])](#tooltip.bodyStyle)
     * [.border([*value*])](#tooltip.border)
+    * [.borderRadius([*value*])](#tooltip.borderRadius)
     * [.className([*value*])](#tooltip.className)
     * [.config([*value*])](#tooltip.config)
     * [.data([*data*])](#tooltip.data)
@@ -75,6 +77,17 @@ Creates HTML tooltips in the body of a webpage. If *data* is specified, immediat
     * [.titleStyle([*value*])](#tooltip.titleStyle)
     * [.translate([*value*])](#tooltip.translate)
     * [.width([*value*])](#tooltip.width)
+
+<a name="tooltip.background"></a>
+
+### tooltip.background([*value*])
+If *value* is specified, sets the background accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current background accessor.
+
+**Kind**: static method of <code>[tooltip](#tooltip)</code>  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| [*value*] | <code>function</code> &#124; <code>String</code> | <code>&quot;1px solid #444&quot;</code> | 
 
 <a name="tooltip.body"></a>
 
@@ -115,6 +128,17 @@ If *value* is specified, sets the body styles to the specified values and return
 
 ### tooltip.border([*value*])
 If *value* is specified, sets the border accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current border accessor.
+
+**Kind**: static method of <code>[tooltip](#tooltip)</code>  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| [*value*] | <code>function</code> &#124; <code>String</code> | <code>&quot;1px solid #444&quot;</code> | 
+
+<a name="tooltip.borderRadius"></a>
+
+### tooltip.borderRadius([*value*])
+If *value* is specified, sets the border-radius accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current border-radius accessor.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
 
