@@ -37,6 +37,7 @@ export default function(data = []) {
     box
       .style("background", background)
       .style(`${pre}border-radius`, borderRadius)
+      .style("pointer-events", pointerEvents)
       .style("padding", padding)
       .style("width", width)
       .style("height", height)
@@ -85,6 +86,7 @@ export default function(data = []) {
       id = tooltipId,
       offset = constant(5),
       padding = constant("5px"),
+      pointerEvents = constant("auto"),
       tableStyle = {
         "border-spacing": "0",
         "width": "100%"
@@ -183,7 +185,7 @@ export default function(data = []) {
   /**
       @memberof tooltip
       @desc If *value* is specified, sets the background accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current background accessor.
-      @param {Function|String} [*value* = "1px solid #444"]
+      @param {Function|String} [*value* = "rgba(255, 255, 255, 0.75)"]
   */
   tooltip.background = function(_) {
     return arguments.length ? (background = typeof _ === "function" ? _ : constant(_), tooltip) : background;
@@ -219,7 +221,7 @@ function value(d) {
   /**
       @memberof tooltip
       @desc If *value* is specified, sets the border accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current border accessor.
-      @param {Function|String} [*value* = "1px solid #444"]
+      @param {Function|String} [*value* = "1px solid rgba(0, 0, 0, 0.1)"]
   */
   tooltip.border = function(_) {
     return arguments.length ? (border = typeof _ === "function" ? _ : constant(_), tooltip) : border;
@@ -228,7 +230,7 @@ function value(d) {
   /**
       @memberof tooltip
       @desc If *value* is specified, sets the border-radius accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current border-radius accessor.
-      @param {Function|String} [*value* = "1px solid #444"]
+      @param {Function|String} [*value* = "2px"]
   */
   tooltip.borderRadius = function(_) {
     return arguments.length ? (borderRadius = typeof _ === "function" ? _ : constant(_), tooltip) : borderRadius;
@@ -343,6 +345,15 @@ function value(d, i) {
   */
   tooltip.padding = function(_) {
     return arguments.length ? (padding = typeof _ === "function" ? _ : constant(_), tooltip) : padding;
+  };
+
+  /**
+      @memberof tooltip
+      @desc If *value* is specified, sets the pointer-events accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current pointer-events accessor.
+      @param {Function|String} [*value* = "auto"]
+  */
+  tooltip.pointerEvents = function(_) {
+    return arguments.length ? (pointerEvents = typeof _ === "function" ? _ : constant(_), tooltip) : pointerEvents;
   };
 
   /**
