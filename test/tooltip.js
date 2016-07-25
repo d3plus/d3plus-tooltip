@@ -1,7 +1,7 @@
 import {test} from "tape";
 import {default as tooltip} from "../src/tooltip.js";
 
-test("tooltip", (assert) => {
+test("tooltip", assert => {
 
   tooltip()
     (() => {

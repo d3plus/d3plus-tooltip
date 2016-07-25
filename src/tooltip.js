@@ -158,7 +158,7 @@ export default function(data = []) {
     const trEnter = tr.enter().append("tr");
     tr.exit().remove();
     const trUpdate = tr.merge(trEnter);
-    const td = trUpdate.selectAll("td").data((d) => d);
+    const td = trUpdate.selectAll("td").data(d => d);
     td.enter().append("td").merge(td).html(cellContent);
 
     divElement("footer");
