@@ -70,6 +70,7 @@ export default function(data = []) {
   let background = constant("rgba(255, 255, 255, 0.75)"),
       body = accessor("body", ""),
       bodyStyle = {
+        "font-family": "Verdana",
         "font-size": "10px",
         "font-weight": "400"
       },
@@ -79,6 +80,7 @@ export default function(data = []) {
       duration = constant(200),
       footer = accessor("footer", ""),
       footerStyle = {
+        "font-family": "Verdana",
         "font-size": "10px",
         "font-weight": "400"
       },
@@ -93,17 +95,20 @@ export default function(data = []) {
       },
       tbody = [],
       tbodyStyle = {
+        "font-family": "Verdana",
         "font-size": "10px",
         "text-align": "center"
       },
       thead = [],
       theadStyle = {
+        "font-family": "Verdana",
         "font-size": "10px",
         "font-weight": "600",
         "text-align": "center"
       },
       title = accessor("title", ""),
       titleStyle = {
+        "font-family": "Verdana",
         "font-size": "12px",
         "font-weight": "600"
       },
@@ -210,6 +215,7 @@ function value(d) {
       @param {Object} [*value*]
       @example <caption>default styles</caption>
 {
+  "font-family": "Verdana",
   "font-size": "10px",
   "font-weight": "400"
 }
@@ -299,6 +305,7 @@ function value(d) {
       @param {Object} [*value*]
       @example <caption>default styles</caption>
 {
+  "font-family": "Verdana",
   "font-size": "10px",
   "font-weight": "400"
 }
@@ -385,6 +392,7 @@ function value(d, i) {
       @param {Object} [*value*]
       @example <caption>default styles</caption>
 {
+  "font-family": "Verdana",
   "font-size": "10px",
   "font-weight": "600",
   "text-align": "center"
@@ -409,6 +417,7 @@ function value(d, i) {
       @param {Object} [*value*]
       @example <caption>default styles</caption>
 {
+  "font-family": "Verdana",
   "font-size": "10px",
   "font-weight": "600",
   "text-align": "center"
@@ -437,6 +446,7 @@ function value(d) {
       @param {Object} [*value*]
       @example <caption>default styles</caption>
 {
+  "font-family": "Verdana",
   "font-size": "12px",
   "font-weight": "600"
 }
