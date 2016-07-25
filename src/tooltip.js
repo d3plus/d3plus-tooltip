@@ -110,7 +110,8 @@ export default function(data = []) {
       titleStyle = {
         "font-family": "Verdana",
         "font-size": "12px",
-        "font-weight": "600"
+        "font-weight": "600",
+        "padding-bottom": "5px"
       },
       translate = tooltipTranslate,
       width = constant("auto");
@@ -448,7 +449,8 @@ function value(d) {
 {
   "font-family": "Verdana",
   "font-size": "12px",
-  "font-weight": "600"
+  "font-weight": "600",
+  "padding-bottom": "5px"
 }
   */
   tooltip.titleStyle = function(_) {
