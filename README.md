@@ -6,43 +6,53 @@
 
 A javascript-only tooltip.
 
-## Installation Options
+## Installing
 
-* [NPM](#install.npm)
-* [Browser](#install.browser)
-* [AMD and CommonJS](#install.amd)
-* [Custom Builds](#install.custom)
-
-<a name="install.npm"></a>
-### NPM
-```sh
-npm install d3plus-tooltip
-```
-
-<a name="install.browser"></a>
-### Browser
-In a vanilla environment, a `d3plus` global is exported. To use a compiled version hosted on [d3plus.org](https://d3plus.org) that includes all dependencies:
+If you use NPM, `npm install d3plus-tooltip`. Otherwise, download the [latest release](https://github.com/d3plus/d3plus-tooltip/releases/latest). The released bundle supports AMD, CommonJS, and vanilla environments. Create a [custom bundle using Rollup](https://github.com/rollup/rollup) or your preferred bundler. You can also load directly from [d3plus.org](https://d3plus.org):
 
 ```html
 <script src="https://d3plus.org/js/d3plus-tooltip.v0.1.full.min.js"></script>
 ```
 
-Otherwise, [click here](https://github.com/d3plus/d3plus-tooltip/releases/latest) to download the latest release.
+[width]: 205
+[height]: 135
 
-<a name="install.amd"></a>
-### AMD and CommonJS
-The released bundle natively supports both AMD and CommonJS, in addition to vanilla environments.
+## Getting Started
 
-<a name="install.custom"></a>
-### Custom Builds
-The source code is written using standard `import` and `export` statements. Create a custom build using [Rollup](https://github.com/rollup/rollup) or your preferred bundler. Take a look at the [index.js](https://github.com/d3plus/d3plus-tooltip/blob/master/index.js) file to see the modules exported.
+This module gives the ability to create tooltips in Javascript with no CSS required. It takes an array of [data](https://github.com/d3plus/d3plus-tooltip#tooltip.data) just like most other [D3plus modules](https://github.com/d3plus), and creates a tooltip for each data point.
 
----
+In this example, and in most use cases, only 1 tooltip is created.
 
-# API Reference
+```js
+var data = [
+  {"title": "D3plus Tooltip", "body": "Check out this cool table:", "x": 100, "y": 120, "label": "Position"}
+];
+
+d3plus.tooltip()
+  .data(data)
+  .thead(["Axis", function(d) { return d.label; }])
+  .tbody([
+    ["x", function(d) { return d.x; }],
+    ["y", function(d) { return d.y; }]
+  ])
+  ();
+```
+
+*Please note the `()` at the end of the chain of commands. This is what tells the [tooltip](https://github.com/d3plus/d3plus-tooltip#tooltip) to finally render to the page, and allows setting multiple properties without it trying to render after each one is set.*
+
+
+[Click here](https://d3plus.org/examples/d3plus-tooltip/getting-started/) to view this example live on the web.
+
+[![Getting Started](/example/getting-started.png)](https://d3plus.org/examples/d3plus-tooltip/getting-started/)
+
+
+
+
+
+## API Reference
 <a name="tooltip"></a>
 
-## tooltip([data])
+### tooltip([data])
 Creates HTML tooltips in the body of a webpage. If *data* is specified, immediately draws the tooltips based on the specified array and returns this generator. If *data* is not specified on instantiation, it can be passed/updated after instantiation using the [data](#tooltip.data) method.
 
 **Kind**: global function  
@@ -81,7 +91,7 @@ Creates HTML tooltips in the body of a webpage. If *data* is specified, immediat
 
 <a name="tooltip.background"></a>
 
-### tooltip.background([*value*])
+#### tooltip.background([*value*])
 If *value* is specified, sets the background accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current background accessor.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -92,7 +102,7 @@ If *value* is specified, sets the background accessor to the specified function 
 
 <a name="tooltip.body"></a>
 
-### tooltip.body([*value*])
+#### tooltip.body([*value*])
 If *value* is specified, sets the body accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current body accessor.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -109,7 +119,7 @@ function value(d) {
 ```
 <a name="tooltip.bodyStyle"></a>
 
-### tooltip.bodyStyle([*value*])
+#### tooltip.bodyStyle([*value*])
 If *value* is specified, sets the body styles to the specified values and returns this generator. If *value* is not specified, returns the current body styles.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -121,13 +131,14 @@ If *value* is specified, sets the body styles to the specified values and return
 **Example** *(default styles)*  
 ```js
 {
+  "font-family": "Verdana",
   "font-size": "10px",
   "font-weight": "400"
 }
 ```
 <a name="tooltip.border"></a>
 
-### tooltip.border([*value*])
+#### tooltip.border([*value*])
 If *value* is specified, sets the border accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current border accessor.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -138,7 +149,7 @@ If *value* is specified, sets the border accessor to the specified function or s
 
 <a name="tooltip.borderRadius"></a>
 
-### tooltip.borderRadius([*value*])
+#### tooltip.borderRadius([*value*])
 If *value* is specified, sets the border-radius accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current border-radius accessor.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -149,7 +160,7 @@ If *value* is specified, sets the border-radius accessor to the specified functi
 
 <a name="tooltip.className"></a>
 
-### tooltip.className([*value*])
+#### tooltip.className([*value*])
 If *value* is specified, sets the class name to the specified string and returns this generator. If *value* is not specified, returns the current class name.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -160,7 +171,7 @@ If *value* is specified, sets the class name to the specified string and returns
 
 <a name="tooltip.config"></a>
 
-### tooltip.config([*value*])
+#### tooltip.config([*value*])
 If *value* is specified, sets the methods that correspond to the key/value pairs and returns this generator. If *value* is not specified, returns the current configuration.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -171,7 +182,7 @@ If *value* is specified, sets the methods that correspond to the key/value pairs
 
 <a name="tooltip.data"></a>
 
-### tooltip.data([*data*])
+#### tooltip.data([*data*])
 If *data* is specified, sets the data array to the specified array and returns this generator. If *data* is not specified, returns the current data array.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -182,7 +193,7 @@ If *data* is specified, sets the data array to the specified array and returns t
 
 <a name="tooltip.duration"></a>
 
-### tooltip.duration([*ms*])
+#### tooltip.duration([*ms*])
 If *ms* is specified, sets the duration accessor to the specified function or number and returns this generator. If *ms* is not specified, returns the current duration accessor.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -193,7 +204,7 @@ If *ms* is specified, sets the duration accessor to the specified function or nu
 
 <a name="tooltip.footer"></a>
 
-### tooltip.footer([*value*])
+#### tooltip.footer([*value*])
 If *value* is specified, sets the footer accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current footer accessor.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -210,7 +221,7 @@ function value(d) {
 ```
 <a name="tooltip.footerStyle"></a>
 
-### tooltip.footerStyle([*value*])
+#### tooltip.footerStyle([*value*])
 If *value* is specified, sets the footer styles to the specified values and returns this generator. If *value* is not specified, returns the current footer styles.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -222,13 +233,14 @@ If *value* is specified, sets the footer styles to the specified values and retu
 **Example** *(default styles)*  
 ```js
 {
+  "font-family": "Verdana",
   "font-size": "10px",
   "font-weight": "400"
 }
 ```
 <a name="tooltip.height"></a>
 
-### tooltip.height([*value*])
+#### tooltip.height([*value*])
 If *value* is specified, sets the height accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current height accessor.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -239,7 +251,7 @@ If *value* is specified, sets the height accessor to the specified function or s
 
 <a name="tooltip.id"></a>
 
-### tooltip.id([*value*])
+#### tooltip.id([*value*])
 If *value* is specified, sets the id accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current id accessor.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -256,7 +268,7 @@ function value(d, i) {
 ```
 <a name="tooltip.offset"></a>
 
-### tooltip.offset([*value*])
+#### tooltip.offset([*value*])
 If *value* is specified, sets the offset accessor to the specified function or number and returns this generator. If *value* is not specified, returns the current offset accessor.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -267,7 +279,7 @@ If *value* is specified, sets the offset accessor to the specified function or n
 
 <a name="tooltip.padding"></a>
 
-### tooltip.padding([*value*])
+#### tooltip.padding([*value*])
 If *value* is specified, sets the padding accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current padding accessor.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -278,7 +290,7 @@ If *value* is specified, sets the padding accessor to the specified function or 
 
 <a name="tooltip.pointerEvents"></a>
 
-### tooltip.pointerEvents([*value*])
+#### tooltip.pointerEvents([*value*])
 If *value* is specified, sets the pointer-events accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current pointer-events accessor.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -289,7 +301,7 @@ If *value* is specified, sets the pointer-events accessor to the specified funct
 
 <a name="tooltip.tableStyle"></a>
 
-### tooltip.tableStyle([*value*])
+#### tooltip.tableStyle([*value*])
 If *value* is specified, sets the table styles to the specified values and returns this generator. If *value* is not specified, returns the current table styles.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -307,7 +319,7 @@ If *value* is specified, sets the table styles to the specified values and retur
 ```
 <a name="tooltip.tbody"></a>
 
-### tooltip.tbody([*value*])
+#### tooltip.tbody([*value*])
 If *value* is specified, sets the contents of the table body to the specified array of functions or strings and returns this generator. If *value* is not specified, returns the current table body data.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -318,7 +330,7 @@ If *value* is specified, sets the contents of the table body to the specified ar
 
 <a name="tooltip.tbodyStyle"></a>
 
-### tooltip.tbodyStyle([*value*])
+#### tooltip.tbodyStyle([*value*])
 If *value* is specified, sets the table body styles to the specified values and returns this generator. If *value* is not specified, returns the current table body styles.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -330,6 +342,7 @@ If *value* is specified, sets the table body styles to the specified values and 
 **Example** *(default styles)*  
 ```js
 {
+  "font-family": "Verdana",
   "font-size": "10px",
   "font-weight": "600",
   "text-align": "center"
@@ -337,7 +350,7 @@ If *value* is specified, sets the table body styles to the specified values and 
 ```
 <a name="tooltip.thead"></a>
 
-### tooltip.thead([*value*])
+#### tooltip.thead([*value*])
 If *value* is specified, sets the contents of the table head to the specified array of functions or strings and returns this generator. If *value* is not specified, returns the current table head data.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -348,7 +361,7 @@ If *value* is specified, sets the contents of the table head to the specified ar
 
 <a name="tooltip.theadStyle"></a>
 
-### tooltip.theadStyle([*value*])
+#### tooltip.theadStyle([*value*])
 If *value* is specified, sets the table head styles to the specified values and returns this generator. If *value* is not specified, returns the current table head styles.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -360,6 +373,7 @@ If *value* is specified, sets the table head styles to the specified values and 
 **Example** *(default styles)*  
 ```js
 {
+  "font-family": "Verdana",
   "font-size": "10px",
   "font-weight": "600",
   "text-align": "center"
@@ -367,7 +381,7 @@ If *value* is specified, sets the table head styles to the specified values and 
 ```
 <a name="tooltip.title"></a>
 
-### tooltip.title([*value*])
+#### tooltip.title([*value*])
 If *value* is specified, sets the title accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current title accessor.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -384,7 +398,7 @@ function value(d) {
 ```
 <a name="tooltip.titleStyle"></a>
 
-### tooltip.titleStyle([*value*])
+#### tooltip.titleStyle([*value*])
 If *value* is specified, sets the title styles to the specified values and returns this generator. If *value* is not specified, returns the current title styles.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -396,13 +410,15 @@ If *value* is specified, sets the title styles to the specified values and retur
 **Example** *(default styles)*  
 ```js
 {
+  "font-family": "Verdana",
   "font-size": "12px",
-  "font-weight": "600"
+  "font-weight": "600",
+  "padding-bottom": "5px"
 }
 ```
 <a name="tooltip.translate"></a>
 
-### tooltip.translate([*value*])
+#### tooltip.translate([*value*])
 If *value* is specified, sets the translate accessor to the specified function or array and returns this generator. If *value* is not specified, returns the current translate accessor.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -419,7 +435,7 @@ function value(d) {
 ```
 <a name="tooltip.width"></a>
 
-### tooltip.width([*value*])
+#### tooltip.width([*value*])
 If *value* is specified, sets the width accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current width accessor.
 
 **Kind**: static method of <code>[tooltip](#tooltip)</code>  
@@ -428,3 +444,6 @@ If *value* is specified, sets the width accessor to the specified function or st
 | --- | --- | --- |
 | [*value*] | <code>function</code> &#124; <code>String</code> | <code>&quot;auto&quot;</code> | 
 
+
+
+###### <sub>Documentation generated on Mon, 25 Jul 2016 14:55:44 GMT</sub>
