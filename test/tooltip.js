@@ -1,10 +1,10 @@
 import {test} from "tape";
-import {default as tooltip} from "../src/tooltip.js";
+import {default as Tooltip} from "../src/Tooltip.js";
 
-test("tooltip", assert => {
+test("Tooltip", assert => {
 
-  tooltip()
-    (() => {
+  new Tooltip()
+    .render(() => {
 
       assert.true(true, "function success");
       assert.end();
