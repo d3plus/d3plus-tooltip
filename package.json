@@ -34,7 +34,7 @@
     "env": "d3plus-env",
     "examples": "d3plus-examples",
     "release": "d3plus-release",
-    "test": "d3plus-test"
+    "test": "browserify -t [ babelify --presets [ es2015 ] ] test/*.js | tape-run"
   },
   "devDependencies": {
     "d3plus-dev": "^0.1.11"
