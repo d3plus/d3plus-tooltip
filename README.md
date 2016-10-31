@@ -454,4 +454,4 @@ Returns the appropriate vendor prefix to use in CSS styles.
 **Kind**: global function  
 
 
-###### <sub>Documentation generated on Mon, 31 Oct 2016 20:38:07 GMT</sub>
+###### <sub>Documentation generated on Mon, 31 Oct 2016 22:13:48 GMT</sub>
