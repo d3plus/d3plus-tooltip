@@ -30,6 +30,7 @@ export default class Tooltip extends BaseClass {
     this._border = constant("1px solid rgba(0, 0, 0, 0.1)");
     this._borderRadius = constant("2px");
     this._className = "d3plus-tooltip";
+    this._data = [];
     this._duration = constant(200);
     this._footer = accessor("footer", "");
     this._footerStyle = {
