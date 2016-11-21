@@ -49,21 +49,6 @@ new d3plus.Tooltip()
 
 
 ## API Reference
-### Classes
-
-<dl>
-<dt><a href="#Tooltip">Tooltip</a> ⇐ <code>BaseClass</code></dt>
-<dd></dd>
-</dl>
-
-### Functions
-
-<dl>
-<dt><a href="#prefix">prefix()</a></dt>
-<dd><p>Returns the appropriate vendor prefix to use in CSS styles.</p>
-</dd>
-</dl>
-
 <a name="Tooltip"></a>
 
 ### Tooltip ⇐ <code>BaseClass</code>
@@ -446,12 +431,6 @@ If *value* is specified, sets the width accessor to the specified function or st
 | --- | --- | --- |
 | [*value*] | <code>function</code> &#124; <code>String</code> | <code>&quot;auto&quot;</code> | 
 
-<a name="prefix"></a>
-
-### prefix()
-Returns the appropriate vendor prefix to use in CSS styles.
-
-**Kind**: global function  
 
 
-###### <sub>Documentation generated on Mon, 31 Oct 2016 22:13:48 GMT</sub>
+###### <sub>Documentation generated on Mon, 21 Nov 2016 19:31:28 GMT</sub>
