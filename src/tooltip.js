@@ -1,9 +1,7 @@
 import {select} from "d3-selection";
 import {transition} from "d3-transition";
 
-import {accessor, BaseClass, constant, stylize} from "d3plus-common";
-
-import {default as prefix} from "./prefix";
+import {accessor, BaseClass, constant, prefix, stylize} from "d3plus-common";
 
 /**
     @class Tooltip
@@ -65,8 +63,7 @@ export default class Tooltip extends BaseClass {
     this._titleStyle = {
       "font-family": "Verdana",
       "font-size": "12px",
-      "font-weight": "600",
-      "padding-bottom": "5px"
+      "font-weight": "600"
     };
     this._translate = d => [d.x, d.y];
     this._width = constant("auto");
