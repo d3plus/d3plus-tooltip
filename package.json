@@ -1,6 +1,6 @@
 {
   "name": "d3plus-tooltip",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A javascript-only tooltip.",
   "main": "build/d3plus-tooltip.js",
   "jsnext:main": "index",

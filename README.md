@@ -433,4 +433,4 @@ If *value* is specified, sets the width accessor to the specified function or st
 
 
 
-###### <sub>Documentation generated on Mon, 21 Nov 2016 19:31:28 GMT</sub>
+###### <sub>Documentation generated on Thu, 26 Jan 2017 16:33:32 GMT</sub>
