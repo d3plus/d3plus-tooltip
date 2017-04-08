@@ -1,14 +1,10 @@
-import {test} from "tape";
+import zora from "zora";
 import {default as Tooltip} from "../src/Tooltip.js";
 
-test("Tooltip", assert => {
+export default zora()
+  .test("Tooltip", function *(assert) {
 
-  new Tooltip()
-    .render(() => {
+    yield cb => new Tooltip().render(cb);
+    assert.ok(true, "function success");
 
-      assert.true(true, "function success");
-      assert.end();
-
-    });
-
-});
+  });
