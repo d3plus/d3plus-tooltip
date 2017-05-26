@@ -25,7 +25,7 @@
   "dependencies": {
     "d3-selection": "^1.1.0",
     "d3-transition": "^1.1.0",
-    "d3plus-common": "^0.6.5"
+    "d3plus-common": "^0.6.18"
   },
   "scripts": {
     "build": "d3plus-build",
