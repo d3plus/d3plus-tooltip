@@ -1,15 +1,12 @@
 # d3plus-tooltip
 
-[![NPM Release](http://img.shields.io/npm/v/d3plus-tooltip.svg?style=flat)](https://www.npmjs.org/package/d3plus-tooltip)
-[![Build Status](https://travis-ci.org/d3plus/d3plus-tooltip.svg?branch=master)](https://travis-ci.org/d3plus/d3plus-tooltip)
-[![Dependency Status](http://img.shields.io/david/d3plus/d3plus-tooltip.svg?style=flat)](https://david-dm.org/d3plus/d3plus-tooltip)
-[![Slack](https://img.shields.io/badge/Slack-Click%20to%20Join!-green.svg?style=social)](https://goo.gl/forms/ynrKdvusekAwRMPf2)
+[![NPM Release](http://img.shields.io/npm/v/d3plus-tooltip.svg?style=flat)](https://www.npmjs.org/package/d3plus-tooltip) [![Build Status](https://travis-ci.org/d3plus/d3plus-tooltip.svg?branch=master)](https://travis-ci.org/d3plus/d3plus-tooltip) [![Dependency Status](http://img.shields.io/david/d3plus/d3plus-tooltip.svg?style=flat)](https://david-dm.org/d3plus/d3plus-tooltip) [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat)](https://gitter.im/d3plus/)
 
 A javascript-only tooltip.
 
 ## Installing
 
-If you use NPM, `npm install d3plus-tooltip`. Otherwise, download the [latest release](https://github.com/d3plus/d3plus-tooltip/releases/latest). The released bundle supports AMD, CommonJS, and vanilla environments. Create a [custom bundle using Rollup](https://github.com/rollup/rollup) or your preferred bundler. You can also load directly from [d3plus.org](https://d3plus.org):
+If you use NPM, run `npm install d3plus-tooltip --save`. Otherwise, download the [latest release](https://github.com/d3plus/d3plus-tooltip/releases/latest). The released bundle supports AMD, CommonJS, and vanilla environments. You can also load directly from [d3plus.org](https://d3plus.org):
 
 ```html
 <script src="https://d3plus.org/js/d3plus-tooltip.v0.2.full.min.js"></script>
@@ -49,11 +46,18 @@ new d3plus.Tooltip()
 
 
 ## API Reference
-<a name="Tooltip"></a>
 
-### Tooltip ⇐ <code>BaseClass</code>
-**Kind**: global class  
-**Extends:** <code>BaseClass</code>  
+##### Classes
+* [Tooltip](#Tooltip)
+
+---
+
+<a name="Tooltip"></a>
+#### **Tooltip** [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L6)
+
+
+This is a global class, and extends all of the methods and functionality of <code>BaseClass</code>.
+
 
 * [Tooltip](#Tooltip) ⇐ <code>BaseClass</code>
     * [new Tooltip()](#new_Tooltip_new)
@@ -82,51 +86,41 @@ new d3plus.Tooltip()
     * [.translate([*value*])](#Tooltip.translate)
     * [.width([*value*])](#Tooltip.width)
 
-<a name="new_Tooltip_new"></a>
+<a name="new_Tooltip_new" href="new_Tooltip_new">#</a> new **Tooltip**()
 
-#### new Tooltip()
 Creates HTML tooltips in the body of a webpage.
 
-<a name="Tooltip.background"></a>
 
-#### Tooltip.background([*value*])
+
+
+<a name="Tooltip.background" href="Tooltip.background">#</a> Tooltip.**background**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L192)
+
 If *value* is specified, sets the background accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current background accessor.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type | Default |
-| --- | --- | --- |
-| [*value*] | <code>function</code> &#124; <code>String</code> | <code>&quot;rgba(255, 255, 255, 0.75)&quot;</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-<a name="Tooltip.body"></a>
+<a name="Tooltip.body" href="Tooltip.body">#</a> Tooltip.**body**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L205)
 
-#### Tooltip.body([*value*])
 If *value* is specified, sets the body accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current body accessor.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type |
-| --- | --- |
-| [*value*] | <code>function</code> &#124; <code>String</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-**Example** *(default accessor)*  
+default accessor
 ```js
 function value(d) {
   return d.body || "";
 }
 ```
-<a name="Tooltip.bodyStyle"></a>
+<a name="Tooltip.bodyStyle" href="Tooltip.bodyStyle">#</a> Tooltip.**bodyStyle**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L220)
 
-#### Tooltip.bodyStyle([*value*])
 If *value* is specified, sets the body styles to the specified values and returns this generator. If *value* is not specified, returns the current body styles.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type |
-| --- | --- |
-| [*value*] | <code>Object</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-**Example** *(default styles)*  
+default styles
 ```js
 {
   "font-family": "Verdana",
@@ -134,90 +128,62 @@ If *value* is specified, sets the body styles to the specified values and return
   "font-weight": "400"
 }
 ```
-<a name="Tooltip.border"></a>
+<a name="Tooltip.border" href="Tooltip.border">#</a> Tooltip.**border**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L229)
 
-#### Tooltip.border([*value*])
 If *value* is specified, sets the border accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current border accessor.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type | Default |
-| --- | --- | --- |
-| [*value*] | <code>function</code> &#124; <code>String</code> | <code>&quot;1px solid rgba(0, 0, 0, 0.1)&quot;</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-<a name="Tooltip.borderRadius"></a>
+<a name="Tooltip.borderRadius" href="Tooltip.borderRadius">#</a> Tooltip.**borderRadius**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L238)
 
-#### Tooltip.borderRadius([*value*])
 If *value* is specified, sets the border-radius accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current border-radius accessor.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type | Default |
-| --- | --- | --- |
-| [*value*] | <code>function</code> &#124; <code>String</code> | <code>&quot;2px&quot;</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-<a name="Tooltip.className"></a>
+<a name="Tooltip.className" href="Tooltip.className">#</a> Tooltip.**className**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L247)
 
-#### Tooltip.className([*value*])
 If *value* is specified, sets the class name to the specified string and returns this generator. If *value* is not specified, returns the current class name.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type | Default |
-| --- | --- | --- |
-| [*value*] | <code>String</code> | <code>&quot;d3plus-tooltip&quot;</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-<a name="Tooltip.data"></a>
+<a name="Tooltip.data" href="Tooltip.data">#</a> Tooltip.**data**([*data*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L256)
 
-#### Tooltip.data([*data*])
 If *data* is specified, sets the data array to the specified array and returns this generator. If *data* is not specified, returns the current data array.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type | Default |
-| --- | --- | --- |
-| [*data*] | <code>Array</code> | <code>[]</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-<a name="Tooltip.duration"></a>
+<a name="Tooltip.duration" href="Tooltip.duration">#</a> Tooltip.**duration**([*ms*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L265)
 
-#### Tooltip.duration([*ms*])
 If *ms* is specified, sets the duration accessor to the specified function or number and returns this generator. If *ms* is not specified, returns the current duration accessor.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type | Default |
-| --- | --- | --- |
-| [*ms*] | <code>function</code> &#124; <code>Number</code> | <code>200</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-<a name="Tooltip.footer"></a>
+<a name="Tooltip.footer" href="Tooltip.footer">#</a> Tooltip.**footer**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L278)
 
-#### Tooltip.footer([*value*])
 If *value* is specified, sets the footer accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current footer accessor.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type |
-| --- | --- |
-| [*value*] | <code>function</code> &#124; <code>String</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-**Example** *(default accessor)*  
+default accessor
 ```js
 function value(d) {
   return d.footer || "";
 }
 ```
-<a name="Tooltip.footerStyle"></a>
+<a name="Tooltip.footerStyle" href="Tooltip.footerStyle">#</a> Tooltip.**footerStyle**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L293)
 
-#### Tooltip.footerStyle([*value*])
 If *value* is specified, sets the footer styles to the specified values and returns this generator. If *value* is not specified, returns the current footer styles.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type |
-| --- | --- |
-| [*value*] | <code>Object</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-**Example** *(default styles)*  
+default styles
 ```js
 {
   "font-family": "Verdana",
@@ -225,108 +191,76 @@ If *value* is specified, sets the footer styles to the specified values and retu
   "font-weight": "400"
 }
 ```
-<a name="Tooltip.height"></a>
+<a name="Tooltip.height" href="Tooltip.height">#</a> Tooltip.**height**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L302)
 
-#### Tooltip.height([*value*])
 If *value* is specified, sets the height accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current height accessor.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type | Default |
-| --- | --- | --- |
-| [*value*] | <code>function</code> &#124; <code>String</code> | <code>&quot;auto&quot;</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-<a name="Tooltip.id"></a>
+<a name="Tooltip.id" href="Tooltip.id">#</a> Tooltip.**id**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L315)
 
-#### Tooltip.id([*value*])
 If *value* is specified, sets the id accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current id accessor.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type |
-| --- | --- |
-| [*value*] | <code>function</code> &#124; <code>String</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-**Example** *(default accessor)*  
+default accessor
 ```js
 function value(d, i) {
   return d.id || "" + i;
 }
 ```
-<a name="Tooltip.offset"></a>
+<a name="Tooltip.offset" href="Tooltip.offset">#</a> Tooltip.**offset**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L324)
 
-#### Tooltip.offset([*value*])
 If *value* is specified, sets the offset accessor to the specified function or number and returns this generator. If *value* is not specified, returns the current offset accessor.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type | Default |
-| --- | --- | --- |
-| [*value*] | <code>function</code> &#124; <code>Number</code> | <code>10</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-<a name="Tooltip.padding"></a>
+<a name="Tooltip.padding" href="Tooltip.padding">#</a> Tooltip.**padding**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L333)
 
-#### Tooltip.padding([*value*])
 If *value* is specified, sets the padding accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current padding accessor.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type | Default |
-| --- | --- | --- |
-| [*value*] | <code>function</code> &#124; <code>String</code> | <code>&quot;5px&quot;</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-<a name="Tooltip.pointerEvents"></a>
+<a name="Tooltip.pointerEvents" href="Tooltip.pointerEvents">#</a> Tooltip.**pointerEvents**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L342)
 
-#### Tooltip.pointerEvents([*value*])
 If *value* is specified, sets the pointer-events accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current pointer-events accessor.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type | Default |
-| --- | --- | --- |
-| [*value*] | <code>function</code> &#124; <code>String</code> | <code>&quot;auto&quot;</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-<a name="Tooltip.tableStyle"></a>
+<a name="Tooltip.tableStyle" href="Tooltip.tableStyle">#</a> Tooltip.**tableStyle**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L356)
 
-#### Tooltip.tableStyle([*value*])
 If *value* is specified, sets the table styles to the specified values and returns this generator. If *value* is not specified, returns the current table styles.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type |
-| --- | --- |
-| [*value*] | <code>Object</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-**Example** *(default styles)*  
+default styles
 ```js
 {
   "border-spacing": "0",
   "width": "100%"
 }
 ```
-<a name="Tooltip.tbody"></a>
+<a name="Tooltip.tbody" href="Tooltip.tbody">#</a> Tooltip.**tbody**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L365)
 
-#### Tooltip.tbody([*value*])
 If *value* is specified, sets the contents of the table body to the specified array of functions or strings and returns this generator. If *value* is not specified, returns the current table body data.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type | Default |
-| --- | --- | --- |
-| [*value*] | <code>Array</code> | <code>[]</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-<a name="Tooltip.tbodyStyle"></a>
+<a name="Tooltip.tbodyStyle" href="Tooltip.tbodyStyle">#</a> Tooltip.**tbodyStyle**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L381)
 
-#### Tooltip.tbodyStyle([*value*])
 If *value* is specified, sets the table body styles to the specified values and returns this generator. If *value* is not specified, returns the current table body styles.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type |
-| --- | --- |
-| [*value*] | <code>Object</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-**Example** *(default styles)*  
+default styles
 ```js
 {
   "font-family": "Verdana",
@@ -335,29 +269,21 @@ If *value* is specified, sets the table body styles to the specified values and 
   "text-align": "center"
 }
 ```
-<a name="Tooltip.thead"></a>
+<a name="Tooltip.thead" href="Tooltip.thead">#</a> Tooltip.**thead**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L390)
 
-#### Tooltip.thead([*value*])
 If *value* is specified, sets the contents of the table head to the specified array of functions or strings and returns this generator. If *value* is not specified, returns the current table head data.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type | Default |
-| --- | --- | --- |
-| [*value*] | <code>Array</code> | <code>[]</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-<a name="Tooltip.theadStyle"></a>
+<a name="Tooltip.theadStyle" href="Tooltip.theadStyle">#</a> Tooltip.**theadStyle**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L406)
 
-#### Tooltip.theadStyle([*value*])
 If *value* is specified, sets the table head styles to the specified values and returns this generator. If *value* is not specified, returns the current table head styles.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type |
-| --- | --- |
-| [*value*] | <code>Object</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-**Example** *(default styles)*  
+default styles
 ```js
 {
   "font-family": "Verdana",
@@ -366,35 +292,27 @@ If *value* is specified, sets the table head styles to the specified values and 
   "text-align": "center"
 }
 ```
-<a name="Tooltip.title"></a>
+<a name="Tooltip.title" href="Tooltip.title">#</a> Tooltip.**title**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L419)
 
-#### Tooltip.title([*value*])
 If *value* is specified, sets the title accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current title accessor.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type |
-| --- | --- |
-| [*value*] | <code>function</code> &#124; <code>String</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-**Example** *(default accessor)*  
+default accessor
 ```js
 function value(d) {
   return d.title || "";
 }
 ```
-<a name="Tooltip.titleStyle"></a>
+<a name="Tooltip.titleStyle" href="Tooltip.titleStyle">#</a> Tooltip.**titleStyle**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L435)
 
-#### Tooltip.titleStyle([*value*])
 If *value* is specified, sets the title styles to the specified values and returns this generator. If *value* is not specified, returns the current title styles.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type |
-| --- | --- |
-| [*value*] | <code>Object</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-**Example** *(default styles)*  
+default styles
 ```js
 {
   "font-family": "Verdana",
@@ -403,34 +321,26 @@ If *value* is specified, sets the title styles to the specified values and retur
   "padding-bottom": "5px"
 }
 ```
-<a name="Tooltip.translate"></a>
+<a name="Tooltip.translate" href="Tooltip.translate">#</a> Tooltip.**translate**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L448)
 
-#### Tooltip.translate([*value*])
 If *value* is specified, sets the translate accessor to the specified function or array and returns this generator. If *value* is not specified, returns the current translate accessor.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type |
-| --- | --- |
-| [*value*] | <code>function</code> &#124; <code>Array</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
-**Example** *(default accessor)*  
+default accessor
 ```js
 function value(d) {
   return [d.x, d.y];
 }
 ```
-<a name="Tooltip.width"></a>
+<a name="Tooltip.width" href="Tooltip.width">#</a> Tooltip.**width**([*value*]) [<>](https://github.com/d3plus/d3plus-tooltip/blob/master/src/Tooltip.js#L457)
 
-#### Tooltip.width([*value*])
 If *value* is specified, sets the width accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current width accessor.
 
-**Kind**: static method of <code>[Tooltip](#Tooltip)</code>  
 
-| Param | Type | Default |
-| --- | --- | --- |
-| [*value*] | <code>function</code> &#124; <code>String</code> | <code>&quot;auto&quot;</code> | 
+This is a static method of [<code>Tooltip</code>](#Tooltip).
 
+---
 
-
-###### <sub>Documentation generated on Thu, 26 Jan 2017 16:33:32 GMT</sub>
+###### <sub>Documentation generated on Fri, 26 May 2017 19:55:27 GMT</sub>
