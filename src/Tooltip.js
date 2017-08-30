@@ -21,8 +21,8 @@ export default class Tooltip extends BaseClass {
     this._background = constant("rgba(255, 255, 255, 0.75)");
     this._body = accessor("body", "");
     this._bodyStyle = {
-      "font-family": "Verdana",
-      "font-size": "10px",
+      "font-family": "'Roboto', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif",
+      "font-size": "12px",
       "font-weight": "400"
     };
     this._border = constant("1px solid rgba(0, 0, 0, 0.1)");
@@ -32,8 +32,8 @@ export default class Tooltip extends BaseClass {
     this._duration = constant(200);
     this._footer = accessor("footer", "");
     this._footerStyle = {
-      "font-family": "Verdana",
-      "font-size": "10px",
+      "font-family": "'Roboto', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif",
+      "font-size": "12px",
       "font-weight": "400"
     };
     this._height = constant("auto");
@@ -48,21 +48,21 @@ export default class Tooltip extends BaseClass {
     };
     this._tbody = [];
     this._tbodyStyle = {
-      "font-family": "Verdana",
-      "font-size": "10px",
+      "font-family": "'Roboto', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif",
+      "font-size": "12px",
       "text-align": "center"
     };
     this._thead = [];
     this._theadStyle = {
-      "font-family": "Verdana",
-      "font-size": "10px",
+      "font-family": "'Roboto', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif",
+      "font-size": "12px",
       "font-weight": "600",
       "text-align": "center"
     };
     this._title = accessor("title", "");
     this._titleStyle = {
-      "font-family": "Verdana",
-      "font-size": "12px",
+      "font-family": "'Roboto', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif",
+      "font-size": "14px",
       "font-weight": "600"
     };
     this._translate = d => [d.x, d.y];
@@ -212,8 +212,8 @@ function value(d) {
       @param {Object} [*value*]
       @example <caption>default styles</caption>
 {
-  "font-family": "Verdana",
-  "font-size": "10px",
+  "font-family": "'Roboto', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif",
+  "font-size": "12px",
   "font-weight": "400"
 }
   */
@@ -285,8 +285,8 @@ function value(d) {
       @param {Object} [*value*]
       @example <caption>default styles</caption>
 {
-  "font-family": "Verdana",
-  "font-size": "10px",
+  "font-family": "'Roboto', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif",
+  "font-size": "12px",
   "font-weight": "400"
 }
   */
@@ -372,8 +372,8 @@ function value(d, i) {
       @param {Object} [*value*]
       @example <caption>default styles</caption>
 {
-  "font-family": "Verdana",
-  "font-size": "10px",
+  "font-family": "'Roboto', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif",
+  "font-size": "12px",
   "font-weight": "600",
   "text-align": "center"
 }
@@ -397,8 +397,8 @@ function value(d, i) {
       @param {Object} [*value*]
       @example <caption>default styles</caption>
 {
-  "font-family": "Verdana",
-  "font-size": "10px",
+  "font-family": "'Roboto', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif",
+  "font-size": "12px",
   "font-weight": "600",
   "text-align": "center"
 }
@@ -426,8 +426,8 @@ function value(d) {
       @param {Object} [*value*]
       @example <caption>default styles</caption>
 {
-  "font-family": "Verdana",
-  "font-size": "12px",
+  "font-family": "'Roboto', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif",
+  "font-size": "14px",
   "font-weight": "600",
   "padding-bottom": "5px"
 }
