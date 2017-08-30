@@ -1,6 +1,6 @@
 {
   "name": "d3plus-tooltip",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "A javascript-only tooltip.",
   "main": "build/d3plus-tooltip.js",
   "jsnext:main": "index",
@@ -37,6 +37,6 @@
     "test": "d3plus-test"
   },
   "devDependencies": {
-    "d3plus-dev": "^0.4.17"
+    "d3plus-dev": "^0.4.19"
   }
 }
