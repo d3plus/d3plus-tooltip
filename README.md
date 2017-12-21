@@ -47,7 +47,7 @@ new d3plus.Tooltip()
 
 ## API Reference
 
-##### Classes
+##### 
 * [Tooltip](#Tooltip)
 
 ---
@@ -381,4 +381,4 @@ This is a static method of [<code>Tooltip</code>](#Tooltip).
 
 
 
-###### <sub>Documentation generated on Wed, 30 Aug 2017 20:53:44 GMT</sub>
+###### <sub>Documentation generated on Thu, 21 Dec 2017 21:46:26 GMT</sub>
