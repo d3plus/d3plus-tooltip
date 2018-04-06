@@ -3,6 +3,8 @@ import {transition} from "d3-transition";
 
 import {accessor, BaseClass, constant, prefix, stylize} from "d3plus-common";
 
+import Popper from "popper.js";
+
 /**
     @class Tooltip
     @extends BaseClass
@@ -82,12 +84,11 @@ export default class Tooltip extends BaseClass {
       .data(this._data, this._id);
 
     const enter = tooltips.enter().append("div")
-      .attr("class", this._className)
-      .style("position", "absolute")
-      .style(`${this._prefix}transform`, "scale(0)")
-      .style(`${this._prefix}transform-origin`, "50% 100%");
+      .attr("class", this._className);
 
     const update = tooltips.merge(enter);
+
+
 
     /**
         Creates DIV elements with a unique class and styles.
@@ -127,14 +128,7 @@ export default class Tooltip extends BaseClass {
         .style("border", function(d, i) {
           const b = select(this).style("border");
           return b !== "0px none rgb(0, 0, 0)" ? b : that._border(d, i);
-        })
-        .style("top", function(d, i) {
-          return `${that._translate(d, i)[1] - this.offsetHeight - that._offset(d, i)}px`;
-        })
-        .style("left", function(d, i) {
-          return `${that._translate(d, i)[0] - this.offsetWidth / 2}px`;
         });
-
     }
 
     divElement("title");
@@ -170,15 +164,32 @@ export default class Tooltip extends BaseClass {
     update
       .attr("id", (d, i) => `d3plus-tooltip-${this._id(d, i)}`)
       .transition(t)
-        .style(`${this._prefix}transform`, "scale(1)")
+        .style("opacity", 1)
         .call(boxStyles);
 
     tooltips.exit()
       .transition(t)
-        .style(`${this._prefix}transform`, "scale(0)")
-        .remove();
+        .style("opacity", 0)
+      .remove();
 
     if (callback) setTimeout(callback, this._duration + 100);
+
+    if (this._reference() && !this._tooltipElement) {
+      const tooltip = document.getElementById(`d3plus-tooltip-${this._id(that._data[0])}`);
+      this._tooltipElement = tooltip;
+      new Popper(this._reference(), tooltip, {
+        placement: "top",
+        modifiers: {
+          flip: {
+            behavior: ["left", "bottom", "right"]
+          }
+        }
+      });
+    }
+
+    if (this._tooltipElement && this._data.length === 0) {
+      this._tooltipElement = undefined;
+    }
 
     return this;
 
@@ -341,6 +352,10 @@ function value(d, i) {
   */
   pointerEvents(_) {
     return arguments.length ? (this._pointerEvents = typeof _ === "function" ? _ : constant(_), this) : this._pointerEvents;
+  }
+
+  reference(_) {
+    return arguments.length ? (this._reference = typeof _ === "function" ? _ : constant(_), this) : this._reference;
   }
 
   /**
