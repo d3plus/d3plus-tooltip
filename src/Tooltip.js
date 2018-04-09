@@ -88,8 +88,6 @@ export default class Tooltip extends BaseClass {
 
     const update = tooltips.merge(enter);
 
-
-
     /**
         Creates DIV elements with a unique class and styles.
         @private
@@ -172,24 +170,43 @@ export default class Tooltip extends BaseClass {
         .style("opacity", 0)
       .remove();
 
-    if (callback) setTimeout(callback, this._duration + 100);
+    const referenceObject = {
+      clientWidth: 0,
+      clientHeight: 0,
+      getBoundingClientRect: () => ({
+        top: that._translate(that._data[0])[1],
+        right: that._translate(that._data[0])[0],
+        bottom: that._translate(that._data[0])[1],
+        left: that._translate(that._data[0])[0],
+        width: 0,
+        height: 0
+      })
+    };
 
-    if (this._reference() && !this._tooltipElement) {
-      const tooltip = document.getElementById(`d3plus-tooltip-${this._id(that._data[0])}`);
+    if (!this._tooltipElement) {
+      const tooltip = document.getElementById(`${this._className}-${this._id(this._data[0])}`);
       this._tooltipElement = tooltip;
-      new Popper(this._reference(), tooltip, {
+      new Popper(referenceObject, tooltip, {
         placement: "top",
         modifiers: {
           flip: {
-            behavior: ["left", "bottom", "right"]
-          }
+            enabled: false
+          },
+          offset: {offset: `0,${this._offset()}`}
+        },
+        onCreate({instance}) {
+          document.onmousemove = () => {
+            instance.scheduleUpdate();
+          };
         }
       });
     }
 
-    if (this._tooltipElement && this._data.length === 0) {
+    if (this._tooltipElement && !this._data.length) {
       this._tooltipElement = undefined;
     }
+
+    if (callback) setTimeout(callback, this._duration + 100);
 
     return this;
 
@@ -352,10 +369,6 @@ function value(d, i) {
   */
   pointerEvents(_) {
     return arguments.length ? (this._pointerEvents = typeof _ === "function" ? _ : constant(_), this) : this._pointerEvents;
-  }
-
-  reference(_) {
-    return arguments.length ? (this._reference = typeof _ === "function" ? _ : constant(_), this) : this._reference;
   }
 
   /**
