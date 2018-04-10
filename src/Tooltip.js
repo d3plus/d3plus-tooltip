@@ -230,6 +230,36 @@ export default class Tooltip extends BaseClass {
   }
 
   /**
+   @memberof Tooltip
+   @desc If *value* is specified, sets the arrow accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current arrow accessor.
+   @param {Function|String} [*value*]
+   @example <caption>default accessor</caption>
+   function value(d) {
+  return d.arrow || "";
+}
+   */
+  arrow(_) {
+    return arguments.length ? (this._arrow = typeof _ === "function" ? _ : constant(_), this) : this._arrow;
+  }
+
+  /**
+   @memberof Tooltip
+   @desc If *value* is specified, sets the arrow styles to the specified values and returns this generator. If *value* is not specified, returns the current arrow styles.
+   @param {Object} [*value*]
+   @example <caption>default styles</caption>
+   {
+     "content": "",
+     "border-width": "10px",
+     "border-style": "solid",
+     "border-color": "rgba(255, 255, 255, 0.75) transparent transparent transparent",
+     "position": "absolute"
+   }
+   */
+  arrowStyle(_) {
+    return arguments.length ? (this._arrowStyle = Object.assign(this._arrowStyle, _), this) : this._arrowStyle;
+  }
+
+  /**
       @memberof Tooltip
       @desc If *value* is specified, sets the background accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current background accessor.
       @param {Function|String} [*value* = "rgba(255, 255, 255, 0.75)"]
