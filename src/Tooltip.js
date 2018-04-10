@@ -187,27 +187,30 @@ export default class Tooltip extends BaseClass {
         .style("opacity", 0)
       .remove();
 
-    for (let i = 0; i < this.data.length; i++) {
-      if (that._data[i]) {
-        const tooltip = document.getElementById(`d3plus-tooltip-${that._id(that._data[i], i)}`);
-        const arrow = document.getElementById(`d3plus-tooltip-arrow-${that._id(that._data[i], i)}`);
+    for (let i = 0; i < this._data.length; i++) {
+      const d = that._data[i];
+
+      if (d) {
+        const tooltip = document.getElementById(`d3plus-tooltip-${that._id(d, i)}`);
+        const arrow = document.getElementById(`d3plus-tooltip-arrow-${that._id(d, i)}`);
         const arrowHeight = arrow.getBoundingClientRect().height;
         arrow.style.bottom = `-${arrowHeight / 2 + 1}px`;
 
         const arrowOffset = arrowHeight / 4;
 
-        const referenceObject = that._position() instanceof Element ? that._position() : {
+        const referenceObject = Array.isArray(that._position(d, i)) ? {
           clientWidth: 0,
           clientHeight: 0,
           getBoundingClientRect: () => ({
-            top: that._position(that._data[i])[1] - arrowOffset,
-            right: that._position(that._data[i])[0] - arrowOffset,
-            bottom: that._position(that._data[i])[1] - arrowOffset,
-            left: that._position(that._data[i])[0] - arrowOffset,
+            top: that._position(d)[1] - arrowOffset,
+            right: that._position(d)[0] - arrowOffset,
+            bottom: that._position(d)[1] - arrowOffset,
+            left: that._position(d)[0] - arrowOffset,
             width: 0,
             height: 0
           })
-        };
+        }
+          : that._position(d, i);
 
         new Popper(referenceObject, tooltip, {
           placement: "top",
