@@ -23,8 +23,6 @@ export default class Tooltip extends BaseClass {
     this._arrow = accessor("arrow", "");
     this._arrowStyle = {
       "content": "",
-      "width": 0,
-      "height": 0,
       "border-width": "10px",
       "border-style": "solid",
       "border-color": "rgba(255, 255, 255, 0.75) transparent transparent transparent",
@@ -103,7 +101,8 @@ export default class Tooltip extends BaseClass {
         @private
     */
     function divElement(cat) {
-      enter.append("div").attr("class", `d3plus-tooltip-${cat}`);
+      enter.append("div").attr("class", `d3plus-tooltip-${cat}`)
+                         .attr("id", `d3plus-tooltip-${cat}-${that._data.length ? that._id(that._data[0]) : ""}`);
       const div = update.select(`.d3plus-tooltip-${cat}`).html(that[`_${cat}`]);
       stylize(div, that[`_${cat}Style`]);
     }
@@ -182,25 +181,29 @@ export default class Tooltip extends BaseClass {
         .style("opacity", 0)
       .remove();
 
-    const referenceObject = {
-      clientWidth: 0,
-      clientHeight: 0,
-      getBoundingClientRect: () => ({
-        top: that._translate(that._data[0])[1],
-        right: that._translate(that._data[0])[0],
-        bottom: that._translate(that._data[0])[1],
-        left: that._translate(that._data[0])[0],
-        width: 0,
-        height: 0
-      })
-    };
-
     if (!this._tooltipElement) {
+
       const tooltip = document.getElementById(`${this._className}-${this._id(this._data[0])}`);
-      const arrow = document.getElementsByClassName(`${this._className}-arrow`)[0];
-      this._tooltipElement = tooltip;
-      new Popper(referenceObject, tooltip, {
-        arrowElement: arrow,
+      const arrow = document.getElementById(`d3plus-tooltip-arrow-${this._id(this._data[0])}`);
+      const arrowHeight = arrow.getBoundingClientRect().height;
+      arrow.style.bottom = `-${arrowHeight + 1}px`;
+
+      const arrowOffset = arrowHeight / 4;
+
+      const referenceObject = {
+        clientWidth: 0,
+        clientHeight: 0,
+        getBoundingClientRect: () => ({
+          top: that._translate(that._data[0])[1] - arrowOffset,
+          right: that._translate(that._data[0])[0] - arrowOffset,
+          bottom: that._translate(that._data[0])[1] - arrowOffset,
+          left: that._translate(that._data[0])[0] - arrowOffset,
+          width: 0,
+          height: 0
+        })
+      };
+
+      this._tooltipElement =  new Popper(referenceObject, tooltip, {
         placement: "top",
         modifiers: {
           arrow: {
@@ -211,11 +214,6 @@ export default class Tooltip extends BaseClass {
           },
           offset: {offset: `0,${this._offset()}`}
         },
-        offsets: {
-          arrow: {
-            top: 10
-          }
-        },
         onCreate({instance}) {
           document.onmousemove = () => {
             instance.scheduleUpdate();
@@ -225,6 +223,7 @@ export default class Tooltip extends BaseClass {
     }
 
     if (this._tooltipElement && !this._data.length) {
+      this._tooltipElement.destroy();
       this._tooltipElement = undefined;
     }
 
