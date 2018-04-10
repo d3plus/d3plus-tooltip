@@ -23,17 +23,22 @@ export default class Tooltip extends BaseClass {
     this._arrow = accessor("arrow", "");
     this._arrowStyle = {
       "content": "",
-      "border-width": "10px",
-      "border-style": "solid",
-      "border-color": "rgba(255, 255, 255, 0.75) transparent transparent transparent",
-      "position": "absolute"
+      "background": "inherit",
+      "border": "inherit",
+      "border-width": "0 1px 1px 0",
+      "height": "10px",
+      "position": "absolute",
+      "transform": "rotate(45deg) translateX(-50%)",
+      "width": "10px",
+      "z-index": "-1"
     };
-    this._background = constant("rgba(255, 255, 255, 0.75)");
+    this._background = constant("rgba(255, 255, 255, 1)");
     this._body = accessor("body", "");
     this._bodyStyle = {
       "font-family": "'Roboto', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif",
       "font-size": "12px",
-      "font-weight": "400"
+      "font-weight": "400",
+      "z-index": "1"
     };
     this._border = constant("1px solid rgba(0, 0, 0, 0.1)");
     this._borderRadius = constant("2px");
@@ -44,7 +49,8 @@ export default class Tooltip extends BaseClass {
     this._footerStyle = {
       "font-family": "'Roboto', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif",
       "font-size": "12px",
-      "font-weight": "400"
+      "font-weight": "400",
+      "z-index": "1"
     };
     this._height = constant("auto");
     this._id = (d, i) => d.id || `${i}`;
@@ -186,7 +192,7 @@ export default class Tooltip extends BaseClass {
         const tooltip = document.getElementById(`d3plus-tooltip-${that._id(that._data[i], i)}`);
         const arrow = document.getElementById(`d3plus-tooltip-arrow-${that._id(that._data[i], i)}`);
         const arrowHeight = arrow.getBoundingClientRect().height;
-        arrow.style.bottom = `-${arrowHeight + 1}px`;
+        arrow.style.bottom = `-${arrowHeight / 2 + 1}px`;
 
         const arrowOffset = arrowHeight / 4;
 
