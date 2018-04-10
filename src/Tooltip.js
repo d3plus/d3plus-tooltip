@@ -183,7 +183,7 @@ export default class Tooltip extends BaseClass {
 
     for (let i = 0; i < this.data.length; i++) {
       if (that._data[i]) {
-        const tooltip = document.getElementById(`${this._className}-${that._id(that._data[i], i)}`);
+        const tooltip = document.getElementById(`d3plus-tooltip-${that._id(that._data[i], i)}`);
         const arrow = document.getElementById(`d3plus-tooltip-arrow-${that._id(that._data[i], i)}`);
         const arrowHeight = arrow.getBoundingClientRect().height;
         arrow.style.bottom = `-${arrowHeight + 1}px`;
@@ -231,7 +231,7 @@ export default class Tooltip extends BaseClass {
 
   /**
    @memberof Tooltip
-   @desc If *value* is specified, sets the arrow accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current arrow accessor.
+   @desc Sets the inner HTML content of the arrow element, which by default is empty.
    @param {Function|String} [*value*]
    @example <caption>default accessor</caption>
    function value(d) {
