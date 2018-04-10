@@ -102,7 +102,8 @@ export default class Tooltip extends BaseClass {
     */
     function divElement(cat) {
       enter.append("div").attr("class", `d3plus-tooltip-${cat}`)
-                         .attr("id", `d3plus-tooltip-${cat}-${that._data.length ? that._id(that._data[0]) : ""}`);
+                         .attr("id", (d, i) => `d3plus-tooltip-${cat}-${d ? that._id(d, i) : ""}`);
+
       const div = update.select(`.d3plus-tooltip-${cat}`).html(that[`_${cat}`]);
       stylize(div, that[`_${cat}Style`]);
     }
@@ -171,7 +172,7 @@ export default class Tooltip extends BaseClass {
     const t = transition().duration(this._duration);
 
     update
-      .attr("id", (d, i) => `d3plus-tooltip-${this._id(d, i)}`)
+      .attr("id", (d, i) => `d3plus-tooltip-${d ? this._id(d, i) : ""}`)
       .transition(t)
         .style("opacity", 1)
         .call(boxStyles);
@@ -181,50 +182,46 @@ export default class Tooltip extends BaseClass {
         .style("opacity", 0)
       .remove();
 
-    if (!this._tooltipElement) {
+    for (let i = 0; i < this.data.length; i++) {
+      if (that._data[i]) {
+        const tooltip = document.getElementById(`${this._className}-${that._id(that._data[i], i)}`);
+        const arrow = document.getElementById(`d3plus-tooltip-arrow-${that._id(that._data[i], i)}`);
+        const arrowHeight = arrow.getBoundingClientRect().height;
+        arrow.style.bottom = `-${arrowHeight + 1}px`;
 
-      const tooltip = document.getElementById(`${this._className}-${this._id(this._data[0])}`);
-      const arrow = document.getElementById(`d3plus-tooltip-arrow-${this._id(this._data[0])}`);
-      const arrowHeight = arrow.getBoundingClientRect().height;
-      arrow.style.bottom = `-${arrowHeight + 1}px`;
+        const arrowOffset = arrowHeight / 4;
 
-      const arrowOffset = arrowHeight / 4;
+        const referenceObject = {
+          clientWidth: 0,
+          clientHeight: 0,
+          getBoundingClientRect: () => ({
+            top: that._translate(that._data[i])[1] - arrowOffset,
+            right: that._translate(that._data[i])[0] - arrowOffset,
+            bottom: that._translate(that._data[i])[1] - arrowOffset,
+            left: that._translate(that._data[i])[0] - arrowOffset,
+            width: 0,
+            height: 0
+          })
+        };
 
-      const referenceObject = {
-        clientWidth: 0,
-        clientHeight: 0,
-        getBoundingClientRect: () => ({
-          top: that._translate(that._data[0])[1] - arrowOffset,
-          right: that._translate(that._data[0])[0] - arrowOffset,
-          bottom: that._translate(that._data[0])[1] - arrowOffset,
-          left: that._translate(that._data[0])[0] - arrowOffset,
-          width: 0,
-          height: 0
-        })
-      };
-
-      this._tooltipElement =  new Popper(referenceObject, tooltip, {
-        placement: "top",
-        modifiers: {
-          arrow: {
-            element: arrow
+        new Popper(referenceObject, tooltip, {
+          placement: "top",
+          modifiers: {
+            arrow: {
+              element: arrow
+            },
+            flip: {
+              enabled: false
+            },
+            offset: {offset: `0,${that._offset()}`}
           },
-          flip: {
-            enabled: false
-          },
-          offset: {offset: `0,${this._offset()}`}
-        },
-        onCreate({instance}) {
-          document.onmousemove = () => {
-            instance.scheduleUpdate();
-          };
-        }
-      });
-    }
-
-    if (this._tooltipElement && !this._data.length) {
-      this._tooltipElement.destroy();
-      this._tooltipElement = undefined;
+          onCreate({instance}) {
+            document.onmousemove = () => {
+              instance.scheduleUpdate();
+            };
+          }
+        });
+      }
     }
 
     if (callback) setTimeout(callback, this._duration + 100);
