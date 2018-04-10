@@ -20,6 +20,16 @@ export default class Tooltip extends BaseClass {
   constructor() {
 
     super();
+    this._arrow = accessor("arrow", "");
+    this._arrowStyle = {
+      "content": "",
+      "width": 0,
+      "height": 0,
+      "border-width": "10px",
+      "border-style": "solid",
+      "border-color": "rgba(255, 255, 255, 0.75) transparent transparent transparent",
+      "position": "absolute"
+    };
     this._background = constant("rgba(255, 255, 255, 0.75)");
     this._body = accessor("body", "");
     this._bodyStyle = {
@@ -155,6 +165,8 @@ export default class Tooltip extends BaseClass {
 
     divElement("footer");
 
+    divElement("arrow");
+
     enter.call(boxStyles);
 
     const t = transition().duration(this._duration);
@@ -185,14 +197,24 @@ export default class Tooltip extends BaseClass {
 
     if (!this._tooltipElement) {
       const tooltip = document.getElementById(`${this._className}-${this._id(this._data[0])}`);
+      const arrow = document.getElementsByClassName(`${this._className}-arrow`)[0];
       this._tooltipElement = tooltip;
       new Popper(referenceObject, tooltip, {
+        arrowElement: arrow,
         placement: "top",
         modifiers: {
+          arrow: {
+            element: arrow
+          },
           flip: {
             enabled: false
           },
           offset: {offset: `0,${this._offset()}`}
+        },
+        offsets: {
+          arrow: {
+            top: 10
+          }
         },
         onCreate({instance}) {
           document.onmousemove = () => {
