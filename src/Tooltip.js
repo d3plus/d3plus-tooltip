@@ -51,6 +51,7 @@ export default class Tooltip extends BaseClass {
     this._offset = constant(10);
     this._padding = constant("5px");
     this._pointerEvents = constant("auto");
+    this._position = d => [d.x, d.y];
     this._prefix = prefix();
     this._tableStyle = {
       "border-spacing": "0",
@@ -75,9 +76,7 @@ export default class Tooltip extends BaseClass {
       "font-size": "14px",
       "font-weight": "600"
     };
-    this._translate = d => [d.x, d.y];
     this._width = constant("auto");
-
   }
 
   /**
@@ -191,14 +190,14 @@ export default class Tooltip extends BaseClass {
 
         const arrowOffset = arrowHeight / 4;
 
-        const referenceObject = {
+        const referenceObject = that._position() instanceof Element ? that._position() : {
           clientWidth: 0,
           clientHeight: 0,
           getBoundingClientRect: () => ({
-            top: that._translate(that._data[i])[1] - arrowOffset,
-            right: that._translate(that._data[i])[0] - arrowOffset,
-            bottom: that._translate(that._data[i])[1] - arrowOffset,
-            left: that._translate(that._data[i])[0] - arrowOffset,
+            top: that._position(that._data[i])[1] - arrowOffset,
+            right: that._position(that._data[i])[0] - arrowOffset,
+            bottom: that._position(that._data[i])[1] - arrowOffset,
+            left: that._position(that._data[i])[0] - arrowOffset,
             width: 0,
             height: 0
           })
@@ -391,6 +390,19 @@ function value(d, i) {
 
   /**
       @memberof Tooltip
+      @desc If *value* is specified, sets the position accessor to the specified function or array and returns this generator. If *value* is not specified, returns the current position accessor. If *value* is an HTMLElement, positions the Tooltip near that HTMLElement.
+      @param {Function|Array|HTMLElement} [*value*]
+      @example <caption>default accessor</caption>
+   function value(d) {
+    return [d.x, d.y];
+  }
+   */
+  position(_) {
+    return arguments.length ? (this._position = typeof _ === "function" ? _ : constant(_), this) : this._position;
+  }
+
+  /**
+      @memberof Tooltip
       @desc If *value* is specified, sets the table styles to the specified values and returns this generator. If *value* is not specified, returns the current table styles.
       @param {Object} [*value*]
       @example <caption>default styles</caption>
@@ -480,19 +492,6 @@ function value(d) {
   */
   titleStyle(_) {
     return arguments.length ? (this._titleStyle = Object.assign(this._titleStyle, _), this) : this._titleStyle;
-  }
-
-  /**
-      @memberof Tooltip
-      @desc If *value* is specified, sets the translate accessor to the specified function or array and returns this generator. If *value* is not specified, returns the current translate accessor.
-      @param {Function|Array} [*value*]
-      @example <caption>default accessor</caption>
-function value(d) {
-  return [d.x, d.y];
-}
-  */
-  translate(_) {
-    return arguments.length ? (this._translate = typeof _ === "function" ? _ : constant(_), this) : this._translate;
   }
 
   /**
