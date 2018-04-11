@@ -20,6 +20,7 @@ export default class Tooltip extends BaseClass {
   constructor() {
 
     super();
+
     this._arrow = accessor("arrow", "");
     this._arrowStyle = {
       "content": "",
@@ -28,7 +29,7 @@ export default class Tooltip extends BaseClass {
       "border-width": "0 1px 1px 0",
       "height": "10px",
       "position": "absolute",
-      "transform": "rotate(45deg) translateX(-50%)",
+      "transform": "rotate(45deg)",
       "width": "10px",
       "z-index": "-1"
     };
@@ -54,7 +55,7 @@ export default class Tooltip extends BaseClass {
     };
     this._height = constant("auto");
     this._id = (d, i) => d.id || `${i}`;
-    this._offset = constant(10);
+    this._offset = constant(5);
     this._padding = constant("5px");
     this._pointerEvents = constant("auto");
     this._position = d => [d.x, d.y];
@@ -193,19 +194,20 @@ export default class Tooltip extends BaseClass {
       if (d) {
         const tooltip = document.getElementById(`d3plus-tooltip-${that._id(d, i)}`);
         const arrow = document.getElementById(`d3plus-tooltip-arrow-${that._id(d, i)}`);
-        const arrowHeight = arrow.getBoundingClientRect().height;
-        arrow.style.bottom = `-${arrowHeight / 2 + 1}px`;
+        const arrowHeight = arrow.offsetHeight;
+        const arrowDistance = arrow.getBoundingClientRect().height / 2;
+        arrow.style.bottom = `-${arrowHeight / 2}px`;
 
-        const arrowOffset = arrowHeight / 4;
+        const position = that._position(d, i);
 
-        const referenceObject = Array.isArray(that._position(d, i)) ? {
+        const referenceObject = Array.isArray(position) ? {
           clientWidth: 0,
           clientHeight: 0,
           getBoundingClientRect: () => ({
-            top: that._position(d)[1] + arrowOffset,
-            right: that._position(d)[0] + arrowOffset,
-            bottom: that._position(d)[1] + arrowOffset,
-            left: that._position(d)[0] + arrowOffset,
+            top: position[1],
+            right: position[0],
+            bottom: position[1],
+            left: position[0],
             width: 0,
             height: 0
           })
@@ -219,12 +221,15 @@ export default class Tooltip extends BaseClass {
             arrow: {
               element: arrow
             },
-            offset: {offset: `0,${that._offset()}`},
+            offset: {
+              offset: `0,${that._offset(d, i) + arrowDistance}`
+            },
             preventOverflow: {
-              boundariesElement: "viewport"
+              boundariesElement: "scrollParent"
             },
             flip: {
-              behavior: "flip"
+              behavior: "flip",
+              boundariesElement: "viewport"
             }
           },
           onCreate({instance}) {
@@ -232,14 +237,14 @@ export default class Tooltip extends BaseClass {
               instance.scheduleUpdate();
             };
           },
-          onUpdate(data) {
-            if (data.flipped) {
-              arrow.style.transform = "rotate(225deg) translateX(-50%)";
-              arrow.style.top = `-${arrowHeight / 2 + 1}px`;
+          onUpdate({arrowElement, flipped}) {
+            if (flipped) {
+              arrowElement.style.transform = "rotate(225deg)";
+              arrowElement.style.top = `-${arrowHeight / 2}px`;
             }
             else {
-              arrow.style.transform = "rotate(45deg) translateX(-50%)";
-              arrow.style.bottom = `-${arrowHeight / 2 + 1}px`;
+              arrowElement.style.transform = "rotate(45deg)";
+              arrowElement.style.bottom = `-${arrowHeight / 2}px`;
             }
           }
         });
@@ -443,7 +448,7 @@ function value(d, i) {
 
   /**
       @memberof Tooltip
-      @desc If *value* is specified, sets the position accessor to the specified function or array and returns this generator. If *value* is not specified, returns the current position accessor. If *value* is an HTMLElement, positions the Tooltip near that HTMLElement.
+      @desc If *value* is specified, sets the position accessor to the specified function or array and returns this generator. If *value* is not specified, returns the current position accessor. If *value* is an HTMLElement, positions the Tooltip near that HTMLElement. Otherwise, coordinate points must be in reference to the client viewport, not the overall page.
       @param {Function|Array|HTMLElement} [*value*]
       @example <caption>default accessor</caption>
    function value(d) {
