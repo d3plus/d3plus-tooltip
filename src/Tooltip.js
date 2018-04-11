@@ -202,10 +202,10 @@ export default class Tooltip extends BaseClass {
           clientWidth: 0,
           clientHeight: 0,
           getBoundingClientRect: () => ({
-            top: that._position(d)[1] - arrowOffset,
-            right: that._position(d)[0] - arrowOffset,
-            bottom: that._position(d)[1] - arrowOffset,
-            left: that._position(d)[0] - arrowOffset,
+            top: that._position(d)[1] + arrowOffset,
+            right: that._position(d)[0] + arrowOffset,
+            bottom: that._position(d)[1] + arrowOffset,
+            left: that._position(d)[0] + arrowOffset,
             width: 0,
             height: 0
           })
@@ -214,19 +214,33 @@ export default class Tooltip extends BaseClass {
 
         new Popper(referenceObject, tooltip, {
           placement: "top",
+          placements: ["top", "bottom", "left", "right"],
           modifiers: {
             arrow: {
               element: arrow
             },
-            flip: {
-              enabled: false
+            offset: {offset: `0,${that._offset()}`},
+            preventOverflow: {
+              boundariesElement: "viewport"
             },
-            offset: {offset: `0,${that._offset()}`}
+            flip: {
+              behavior: "flip"
+            }
           },
           onCreate({instance}) {
             document.onmousemove = () => {
               instance.scheduleUpdate();
             };
+          },
+          onUpdate(data) {
+            if (data.flipped) {
+              arrow.style.transform = "rotate(225deg) translateX(-50%)";
+              arrow.style.top = `-${arrowHeight / 2 + 1}px`;
+            }
+            else {
+              arrow.style.transform = "rotate(45deg) translateX(-50%)";
+              arrow.style.bottom = `-${arrowHeight / 2 + 1}px`;
+            }
           }
         });
       }
