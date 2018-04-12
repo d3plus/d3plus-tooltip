@@ -1,9 +1,9 @@
 [width]: 400
 [height]: 400
 
-# Tooltip Positioned to HTML Element
+# Tooltip Anchored to an HTML Element
 
-The `.position( )` method in the Tooltip class will accept an array of two numbers representing x and y values (`[x, y]`), a function that returns an array of two numbers, or an HTML element. If an HTML element is supplied, the tooltip will be positioned near that element.
+The [`.position( )` method](https://d3plus.org/docs/#Tooltip.position) in the [Tooltip class](https://github.com/d3plus/d3plus-tooltip) accepts an array of two numbers representing x and y values (in [x, y] format), an accessor function that returns an array of two numbers, or an HTML element used as an anchor point.
 
 ```html
 <div id="square"></div>
@@ -23,7 +23,7 @@ The `.position( )` method in the Tooltip class will accept an array of two numbe
 ```js
 var square = document.getElementById("square");
 
-var tips = new d3plus.Tooltip()
+var tip = new d3plus.Tooltip()
   .data([{title: "Test Tooltip"}])
   .position(square)
   .render();
