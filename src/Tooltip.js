@@ -448,15 +448,15 @@ function value(d, i) {
 
   /**
       @memberof Tooltip
-      @desc If *value* is specified, sets the position accessor to the specified function or array and returns this generator. If *value* is not specified, returns the current position accessor. If *value* is an HTMLElement, positions the Tooltip near that HTMLElement. Otherwise, coordinate points must be in reference to the client viewport, not the overall page.
-      @param {Function|Array|HTMLElement} [*value*]
+      @desc If *value* is specified, sets the position accessor to the specified function or array and returns this generator. If *value* is not specified, returns the current position accessor. If *value* is an HTMLElement, anchors the Tooltip to that HTMLElement. If *value* is a selection string, anchors the Tooltip to the HTMLElement selected by that string. Otherwise, coordinate points must be in reference to the client viewport, not the overall page.
+      @param {Function|Array|HTMLElement|String} [*value*]
       @example <caption>default accessor</caption>
    function value(d) {
     return [d.x, d.y];
   }
    */
   position(_) {
-    return arguments.length ? (this._position = typeof _ === "function" ? _ : constant(_), this) : this._position;
+    return arguments.length ? (this._position = typeof _ === "string" ? constant(select(_)._groups[0] && select(_)._groups[0][0] || [0, 0]) : typeof _ === "function" ? _ : constant(_), this) : this._position;
   }
 
   /**
