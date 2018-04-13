@@ -61,6 +61,7 @@ export default class Tooltip extends BaseClass {
     this._position = d => [d.x, d.y];
     this._prefix = prefix();
     this._tableStyle = {
+      "border-collapse": "collapse",
       "border-spacing": "0",
       "width": "100%"
     };
@@ -82,6 +83,9 @@ export default class Tooltip extends BaseClass {
       "font-family": "'Roboto', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif",
       "font-size": "14px",
       "font-weight": "600"
+    };
+    this._trStyle = {
+      "border-top": "1px solid rgba(0, 0, 0, 0.1)"
     };
     this._width = constant("auto");
   }
@@ -166,6 +170,7 @@ export default class Tooltip extends BaseClass {
     const trEnter = tr.enter().append("tr");
     tr.exit().remove();
     const trUpdate = tr.merge(trEnter);
+    stylize(trUpdate, this._trStyle);
     const td = trUpdate.selectAll("td").data(d => d);
     td.enter().append("td").merge(td).html(cellContent);
 
@@ -465,6 +470,7 @@ function value(d, i) {
       @param {Object} [*value*]
       @example <caption>default styles</caption>
 {
+  "border-collapse": "collapse",
   "border-spacing": "0",
   "width": "100%"
 }
@@ -550,6 +556,19 @@ function value(d) {
   */
   titleStyle(_) {
     return arguments.length ? (this._titleStyle = Object.assign(this._titleStyle, _), this) : this._titleStyle;
+  }
+
+  /**
+      @memberof Tooltip
+      @desc If *value* is specified, sets the table row styles to the specified values and returns this generator. If *value* is not specified, returns the current table row styles.
+      @param {Object} [*value*]
+      @example <caption>default styles</caption>
+  {
+    "border-top": "1px solid rgba(0, 0, 0, 0.1)"
+  }
+   */
+  trStyle(_) {
+    return arguments.length ? (this._trStyle = Object.assign(this._trStyle, _), this) : this._trStyle;
   }
 
   /**
