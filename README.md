@@ -1,6 +1,6 @@
 # d3plus-tooltip
 
-[![NPM Release](http://img.shields.io/npm/v/d3plus-tooltip.svg?style=flat)](https://www.npmjs.org/package/d3plus-tooltip) [![Build Status](https://travis-ci.org/d3plus/d3plus-tooltip.svg?branch=master)](https://travis-ci.org/d3plus/d3plus-tooltip) [![Dependency Status](http://img.shields.io/david/d3plus/d3plus-tooltip.svg?style=flat)](https://david-dm.org/d3plus/d3plus-tooltip) [![Gitter](https://img.shields.io/badge/-chat_on_gitter-brightgreen.svg?style=flat&logo=gitter-white)](https://gitter.im/d3plus/) [![1.0 progress](https://img.shields.io/badge/1.0_progress-100%25-brightgreen.svg?style=flat)](https://github.com/d3plus/d3plus-tooltip/projects/1)
+[![NPM Release](http://img.shields.io/npm/v/d3plus-tooltip.svg?style=flat)](https://www.npmjs.org/package/d3plus-tooltip) [![Build Status](https://travis-ci.org/d3plus/d3plus-tooltip.svg?branch=master)](https://travis-ci.org/d3plus/d3plus-tooltip) [![Dependency Status](http://img.shields.io/david/d3plus/d3plus-tooltip.svg?style=flat)](https://david-dm.org/d3plus/d3plus-tooltip) [![Gitter](https://img.shields.io/badge/-chat_on_gitter-brightgreen.svg?style=flat&logo=gitter-white)](https://gitter.im/d3plus/) [![1.0 progress](https://img.shields.io/badge/1.0_progress-75%25-yellow.svg?style=flat)](https://github.com/d3plus/d3plus-tooltip/projects/1)
 
 A javascript-only tooltip.
 
@@ -42,8 +42,10 @@ new d3plus.Tooltip()
 [Click here](https://d3plus.org/examples/d3plus-tooltip/getting-started/) to view this example live on the web.
 
 
+### More Examples
 
-
+ * [Tooltip Anchored to an HTML Element](http://d3plus.org/examples/d3plus-tooltip/positioned-to-element/)<sup> ***New***</sup>
+ * [Tooltip Following Mouse](http://d3plus.org/examples/d3plus-tooltip/following-mouse/)<sup> ***New***</sup>
 
 ## API Reference
 
@@ -417,4 +419,4 @@ This is a static method of [<code>Tooltip</code>](#Tooltip).
 
 
 
-###### <sub>Documentation generated on Thu, 12 Apr 2018 14:34:49 GMT</sub>
+###### <sub>Documentation generated on Fri, 13 Apr 2018 14:48:07 GMT</sub>
