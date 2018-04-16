@@ -21,10 +21,8 @@ The [`.position( )` method](https://d3plus.org/docs/#Tooltip.position) in the [T
 ```
 
 ```js
-var square = document.getElementById("square");
-
 var tip = new d3plus.Tooltip()
   .data([{title: "Test Tooltip"}])
-  .position(square)
+  .position("#square")
   .render();
 ```
