@@ -456,7 +456,7 @@ function value(d, i) {
   }
    */
   position(_) {
-    return arguments.length ? (this._position = typeof _ === "string" ? constant(select(_)._groups[0] && select(_)._groups[0][0] || [0, 0]) : typeof _ === "function" ? _ : constant(_), this) : this._position;
+    return arguments.length ? (this._position = typeof _ === "string" ? constant(select(_).node() || [0, 0]) : typeof _ === "function" ? _ : constant(_), this) : this._position;
   }
 
   /**
