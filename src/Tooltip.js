@@ -58,6 +58,7 @@ export default class Tooltip extends BaseClass {
     this._offset = constant(5);
     this._padding = constant("5px");
     this._pointerEvents = constant("auto");
+    this._popperClasses = {};
     this._position = d => [d.x, d.y];
     this._prefix = prefix();
     this._tableStyle = {
@@ -178,27 +179,14 @@ export default class Tooltip extends BaseClass {
 
     divElement("arrow");
 
-    enter.call(boxStyles);
-
-    const t = transition().duration(this._duration);
-
-    update
+    enter
       .attr("id", (d, i) => `d3plus-tooltip-${d ? this._id(d, i) : ""}`)
-      .transition(t)
-        .style("opacity", 1)
-        .call(boxStyles);
+      .call(boxStyles)
+      .each((d, i) => {
 
-    tooltips.exit()
-      .transition(t)
-        .style("opacity", 0)
-      .remove();
-
-    for (let i = 0; i < this._data.length; i++) {
-      const d = that._data[i];
-
-      if (d) {
-        const tooltip = document.getElementById(`d3plus-tooltip-${that._id(d, i)}`);
-        const arrow = document.getElementById(`d3plus-tooltip-arrow-${that._id(d, i)}`);
+        const id = that._id(d, i);
+        const tooltip = document.getElementById(`d3plus-tooltip-${id}`);
+        const arrow = document.getElementById(`d3plus-tooltip-arrow-${id}`);
         const arrowHeight = arrow.offsetHeight;
         const arrowDistance = arrow.getBoundingClientRect().height / 2;
         arrow.style.bottom = `-${arrowHeight / 2}px`;
@@ -217,9 +205,9 @@ export default class Tooltip extends BaseClass {
             height: 0
           })
         }
-          : that._position(d, i);
+          : position;
 
-        new Popper(referenceObject, tooltip, {
+        this._popperClasses[id] = new Popper(referenceObject, tooltip, {
           placement: "top",
           placements: ["top", "bottom", "left", "right"],
           modifiers: {
@@ -237,11 +225,6 @@ export default class Tooltip extends BaseClass {
               boundariesElement: "viewport"
             }
           },
-          onCreate({instance}) {
-            document.onmousemove = () => {
-              instance.scheduleUpdate();
-            };
-          },
           onUpdate({arrowElement, flipped}) {
             if (flipped) {
               arrowElement.style.transform = "rotate(225deg)";
@@ -251,10 +234,51 @@ export default class Tooltip extends BaseClass {
               arrowElement.style.transform = "rotate(45deg)";
               arrowElement.style.bottom = `-${arrowHeight / 2}px`;
             }
-          }
+          },
+          removeOnDestroy: true
         });
-      }
-    }
+
+      });
+
+    const t = transition().duration(this._duration);
+
+    update
+      .each((d, i) => {
+        const id = that._id(d, i);
+        const position = that._position(d, i);
+        const instance = this._popperClasses[id];
+
+        const referenceObject = Array.isArray(position) ? {
+          clientWidth: 0,
+          clientHeight: 0,
+          getBoundingClientRect: () => ({
+            top: position[1],
+            right: position[0],
+            bottom: position[1],
+            left: position[0],
+            width: 0,
+            height: 0
+          })
+        }
+          : position;
+        instance.reference = referenceObject;
+        instance.scheduleUpdate();
+
+      })
+      .transition(t)
+        .style("opacity", 1)
+        .call(boxStyles);
+
+    tooltips.exit()
+      .transition(t)
+        .style("opacity", 0)
+      .on("end", (d, i) => {
+        const id = that._id(d, i);
+        const instance = this._popperClasses[id];
+        delete this._popperClasses[id];
+        instance.destroy();
+      })
+      .remove();
 
     if (callback) setTimeout(callback, this._duration + 100);
 
