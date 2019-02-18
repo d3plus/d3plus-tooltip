@@ -275,8 +275,10 @@ export default class Tooltip extends BaseClass {
       .on("end", (d, i) => {
         const id = that._id(d, i);
         const instance = this._popperClasses[id];
-        delete this._popperClasses[id];
-        instance.destroy();
+        if (instance) {
+          instance.destroy();
+          delete this._popperClasses[id];
+        }
       })
       .remove();
 
