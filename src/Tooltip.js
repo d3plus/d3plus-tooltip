@@ -248,21 +248,23 @@ export default class Tooltip extends BaseClass {
         const position = that._position(d, i);
         const instance = this._popperClasses[id];
 
-        const referenceObject = Array.isArray(position) ? {
-          clientWidth: 0,
-          clientHeight: 0,
-          getBoundingClientRect: () => ({
-            top: position[1],
-            right: position[0],
-            bottom: position[1],
-            left: position[0],
-            width: 0,
-            height: 0
-          })
+        if (instance) {
+          const referenceObject = Array.isArray(position) ? {
+            clientWidth: 0,
+            clientHeight: 0,
+            getBoundingClientRect: () => ({
+              top: position[1],
+              right: position[0],
+              bottom: position[1],
+              left: position[0],
+              width: 0,
+              height: 0
+            })
+          }
+            : position;
+          instance.reference = referenceObject;
+          instance.scheduleUpdate();
         }
-          : position;
-        instance.reference = referenceObject;
-        instance.scheduleUpdate();
 
       })
       .transition(t)
