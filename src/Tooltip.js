@@ -1,5 +1,4 @@
 import {select} from "d3-selection";
-import {transition} from "d3-transition";
 
 import {accessor, BaseClass, constant, prefix, stylize} from "d3plus-common";
 
@@ -45,7 +44,6 @@ export default class Tooltip extends BaseClass {
     this._borderRadius = constant("2px");
     this._className = "d3plus-tooltip";
     this._data = [];
-    this._duration = constant(200);
     this._footer = accessor("footer", "");
     this._footerStyle = {
       "font-family": "'Roboto', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif",
@@ -240,8 +238,6 @@ export default class Tooltip extends BaseClass {
 
       });
 
-    const t = transition().duration(this._duration);
-
     update
       .each((d, i) => {
         const id = that._id(d, i);
@@ -267,14 +263,10 @@ export default class Tooltip extends BaseClass {
         }
 
       })
-      .transition(t)
-        .style("opacity", 1)
-        .call(boxStyles);
+      .call(boxStyles);
 
     tooltips.exit()
-      .transition(t)
-        .style("opacity", 0)
-      .on("end", (d, i) => {
+      .each((d, i) => {
         const id = that._id(d, i);
         const instance = this._popperClasses[id];
         if (instance) {
@@ -284,7 +276,7 @@ export default class Tooltip extends BaseClass {
       })
       .remove();
 
-    if (callback) setTimeout(callback, this._duration + 100);
+    if (callback) setTimeout(callback, 100);
 
     return this;
 
@@ -391,15 +383,6 @@ function value(d) {
   */
   data(_) {
     return arguments.length ? (this._data = _, this) : this._data;
-  }
-
-  /**
-      @memberof Tooltip
-      @desc If *ms* is specified, sets the duration accessor to the specified function or number and returns this generator. If *ms* is not specified, returns the current duration accessor.
-      @param {Function|Number} [*ms* = 200]
-  */
-  duration(_) {
-    return arguments.length ? (this._duration = typeof _ === "function" ? _ : constant(_), this) : this._duration;
   }
 
   /**
