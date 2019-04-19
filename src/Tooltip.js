@@ -52,7 +52,7 @@ export default class Tooltip extends BaseClass {
       "z-index": "1"
     };
     this._height = constant("auto");
-    this._id = (d, i) => d.id || `${i}`;
+    this._id = (d, i) => `${i}`;
     this._offset = constant(5);
     this._padding = constant("5px");
     this._pointerEvents = constant("auto");
