@@ -427,4 +427,4 @@ This is a static method of [<code>Tooltip</code>](#Tooltip).
 
 
 
-###### <sub>Documentation generated on Mon, 25 Feb 2019 21:51:36 GMT</sub>
+###### <sub>Documentation generated on Fri, 19 Apr 2019 18:00:59 GMT</sub>
