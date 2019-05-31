@@ -110,11 +110,16 @@ export default class Tooltip extends BaseClass {
         @private
     */
     function divElement(cat) {
-      enter.append("div").attr("class", `d3plus-tooltip-${cat}`)
-                         .attr("id", (d, i) => `d3plus-tooltip-${cat}-${d ? that._id(d, i) : ""}`);
 
-      const div = update.select(`.d3plus-tooltip-${cat}`).html(that[`_${cat}`]);
+      enter.append("div")
+        .attr("class", `d3plus-tooltip-${cat}`)
+        .attr("id", (d, i) => `d3plus-tooltip-${cat}-${d ? that._id(d, i) : ""}`);
+
+      const div = update.select(`.d3plus-tooltip-${cat}`)
+        .html((d, i) => that[`_${cat}`](d, i));
+
       stylize(div, that[`_${cat}Style`]);
+
     }
 
     /**
