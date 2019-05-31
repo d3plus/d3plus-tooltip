@@ -1,6 +1,6 @@
 {
   "name": "d3plus-tooltip",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "A javascript-only tooltip.",
   "main": "build/d3plus-tooltip.js",
   "jsnext:main": "es/index",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "d3-selection": "^1.4.0",
-    "d3plus-common": "^0.6.45",
+    "d3plus-common": "^0.6.48",
     "popper.js": "^1.15.0"
   },
   "scripts": {
