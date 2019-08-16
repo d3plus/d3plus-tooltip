@@ -116,7 +116,8 @@ export default class Tooltip extends BaseClass {
         .attr("id", (d, i) => `d3plus-tooltip-${cat}-${d ? that._id(d, i) : ""}`);
 
       const div = update.select(`.d3plus-tooltip-${cat}`)
-        .html((d, i) => that[`_${cat}`](d, i));
+        .html((d, i) => that[`_${cat}`](d, i))
+        .style("display", (d, i) => that[`_${cat}`](d, i) ? "block" : "none");
 
       stylize(div, that[`_${cat}Style`]);
 
