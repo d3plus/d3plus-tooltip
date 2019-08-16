@@ -117,7 +117,11 @@ export default class Tooltip extends BaseClass {
 
       const div = update.select(`.d3plus-tooltip-${cat}`)
         .html((d, i) => that[`_${cat}`](d, i))
-        .style("display", (d, i) => that[`_${cat}`](d, i) ? "block" : "none");
+        .style("display", (d, i) => {
+          const val = that[`_${cat}`](d, i);
+          const visible = val !== false && val !== undefined && val !== null;
+          return visible ? "block" : "none";
+        });
 
       stylize(div, that[`_${cat}Style`]);
 
