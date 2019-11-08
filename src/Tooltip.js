@@ -86,6 +86,7 @@ export default class Tooltip extends BaseClass {
     this._trStyle = {
       "border-top": "1px solid rgba(0, 0, 0, 0.1)"
     };
+    this._tdStyle = {};
     this._width = constant("auto");
   }
 
@@ -182,6 +183,7 @@ export default class Tooltip extends BaseClass {
     stylize(trUpdate, this._trStyle);
     const td = trUpdate.selectAll("td").data(d => d);
     td.enter().append("td").merge(td).html(cellContent);
+    stylize(td, this._tdStyle);
 
     divElement("footer");
 
@@ -581,7 +583,7 @@ function value(d) {
 
   /**
       @memberof Tooltip
-      @desc If *value* is specified, sets the table row styles to the specified values and returns this generator. If *value* is not specified, returns the current table row styles.
+      @desc An object with CSS keys and values to be applied to all <tr> elements inside of each <tbody>.
       @param {Object} [*value*]
       @example <caption>default styles</caption>
   {
@@ -590,6 +592,15 @@ function value(d) {
    */
   trStyle(_) {
     return arguments.length ? (this._trStyle = Object.assign(this._trStyle, _), this) : this._trStyle;
+  }
+
+  /**
+      @memberof Tooltip
+      @desc An object with CSS keys and values to be applied to all <td> elements inside of each <tr>.
+      @param {Object} [*value*]
+   */
+  tdStyle(_) {
+    return arguments.length ? (this._tdStyle = Object.assign(this._tdStyle, _), this) : this._tdStyle;
   }
 
   /**
