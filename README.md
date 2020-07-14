@@ -9,7 +9,7 @@ A javascript-only tooltip.
 If you use NPM, run `npm install d3plus-tooltip --save`. Otherwise, download the [latest release](https://github.com/d3plus/d3plus-tooltip/releases/latest). The released bundle supports AMD, CommonJS, and vanilla environments. You can also load directly from [d3plus.org](https://d3plus.org):
 
 ```html
-<script src="https://d3plus.org/js/d3plus-tooltip.v0.3.full.min.js"></script>
+<script src="https://d3plus.org/js/d3plus-tooltip.v0.4.full.min.js"></script>
 ```
 
 [width]: 205
@@ -436,4 +436,4 @@ This is a static method of [<code>Tooltip</code>](#Tooltip).
 
 
 
-###### <sub>Documentation generated on Fri, 08 Nov 2019 22:46:44 GMT</sub>
+###### <sub>Documentation generated on Tue, 14 Jul 2020 21:01:31 GMT</sub>
