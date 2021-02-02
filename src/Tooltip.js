@@ -1,7 +1,23 @@
 import {select} from "d3-selection";
 import {colorDefaults} from "d3plus-color";
 import {accessor, BaseClass, constant, prefix, stylize} from "d3plus-common";
-import Popper from "popper.js";
+import {createPopper} from "@popperjs/core/dist/esm/popper";
+
+/**
+ * Creates a reference element for popper.
+ * @param {Number[]} position
+ * @prrivate
+ */
+function generateReference(position = [0, 0]) {
+  return () => ({
+    width: 0,
+    height: 0,
+    top: position[1],
+    right: position[0],
+    bottom: position[1],
+    left: position[0],
+  });
+}
 
 /**
     @class Tooltip
@@ -210,47 +226,60 @@ export default class Tooltip extends BaseClass {
         const position = that._position(d, i);
 
         const referenceObject = Array.isArray(position) ? {
-          clientWidth: 0,
-          clientHeight: 0,
-          getBoundingClientRect: () => ({
-            top: position[1],
-            right: position[0],
-            bottom: position[1],
-            left: position[0],
-            width: 0,
-            height: 0
-          })
+          getBoundingClientRect: generateReference(position)
         }
           : position;
 
-        this._popperClasses[id] = new Popper(referenceObject, tooltip, {
+        this._popperClasses[id] = createPopper(referenceObject, tooltip, {
           placement: "top",
-          placements: ["top", "bottom", "left", "right"],
-          modifiers: {
-            arrow: {
-              element: arrow
+          placements: ["top", "bottom"],
+          modifiers: [
+            {
+              name: "arrow",
+              options: {
+                element: arrow
+              }
             },
-            offset: {
-              offset: `0,${that._offset(d, i) + arrowDistance}`
+            {
+              name: "offset",
+              options: {
+                offset: [0, that._offset(d, i) + arrowDistance]
+              }
             },
-            preventOverflow: {
-              boundariesElement: "scrollParent"
+            {
+              name: "preventOverflow",
+              options: {
+                boundary: "scrollParent",
+                padding: 5
+              }
             },
-            flip: {
-              behavior: "flip",
-              boundariesElement: "viewport"
+            {
+              name: "flip",
+              options: {
+                behavior: "flip",
+                boundary: "viewport",
+                padding: 5
+              }
+            },
+            {
+              name: "update",
+              enabled: true,
+              phase: "afterWrite",
+              fn({state}) {
+                const arrowElement = state.elements.arrow;
+                const arrowStyles = state.styles.arrow;
+                const flipped = state.modifiersData.flip._skip;
+                if (flipped) {
+                  arrowElement.style.transform = `${arrowStyles.transform}rotate(225deg)`;
+                  arrowElement.style.top = `-${arrowHeight / 2}px`;
+                }
+                else {
+                  arrowElement.style.transform = `${arrowStyles.transform}rotate(45deg)`;
+                  arrowElement.style.bottom = `-${arrowHeight / 2}px`;
+                }
+              },
             }
-          },
-          onUpdate({arrowElement, flipped}) {
-            if (flipped) {
-              arrowElement.style.transform = "rotate(225deg)";
-              arrowElement.style.top = `-${arrowHeight / 2}px`;
-            }
-            else {
-              arrowElement.style.transform = "rotate(45deg)";
-              arrowElement.style.bottom = `-${arrowHeight / 2}px`;
-            }
-          },
+          ],
           removeOnDestroy: true
         });
 
@@ -263,21 +292,10 @@ export default class Tooltip extends BaseClass {
         const instance = this._popperClasses[id];
 
         if (instance) {
-          const referenceObject = Array.isArray(position) ? {
-            clientWidth: 0,
-            clientHeight: 0,
-            getBoundingClientRect: () => ({
-              top: position[1],
-              right: position[0],
-              bottom: position[1],
-              left: position[0],
-              width: 0,
-              height: 0
-            })
-          }
+          instance.state.elements.reference.getBoundingClientRect = Array.isArray(position)
+            ? generateReference(position)
             : position;
-          instance.reference = referenceObject;
-          instance.scheduleUpdate();
+          instance.update();
         }
 
       })

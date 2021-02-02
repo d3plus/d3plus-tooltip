@@ -23,10 +23,10 @@
     "url": "http://www.dave-landry.com"
   },
   "dependencies": {
+    "@popperjs/core": "^2.6.0",
     "d3-selection": "^2.0.0",
     "d3plus-color": "^1.0.0",
-    "d3plus-common": "^1.0.0",
-    "popper.js": "^1.15.0"
+    "d3plus-common": "^1.0.0"
   },
   "scripts": {
     "build": "d3plus-build",
