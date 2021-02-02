@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "d3-selection": "^2.0.0",
+    "d3plus-color": "^1.0.0",
     "d3plus-common": "^1.0.0",
     "popper.js": "^1.15.0"
   },

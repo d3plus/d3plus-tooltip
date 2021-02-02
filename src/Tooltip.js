@@ -1,7 +1,6 @@
 import {select} from "d3-selection";
-
+import {colorDefaults} from "d3plus-color";
 import {accessor, BaseClass, constant, prefix, stylize} from "d3plus-common";
-
 import Popper from "popper.js";
 
 /**
@@ -32,9 +31,10 @@ export default class Tooltip extends BaseClass {
       "width": "10px",
       "z-index": "-1"
     };
-    this._background = constant("rgba(255, 255, 255, 1)");
+    this._background = constant(colorDefaults.light);
     this._body = accessor("body", "");
     this._bodyStyle = {
+      "color": colorDefaults.dark,
       "font-family": "'Roboto', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif",
       "font-size": "12px",
       "font-weight": "400",
@@ -46,15 +46,17 @@ export default class Tooltip extends BaseClass {
     this._data = [];
     this._footer = accessor("footer", "");
     this._footerStyle = {
+      "color": colorDefaults.dark,
       "font-family": "'Roboto', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif",
       "font-size": "12px",
       "font-weight": "400",
+      "margin-top": "5px",
       "z-index": "1"
     };
     this._height = constant("auto");
     this._id = (d, i) => `${i}`;
     this._offset = constant(5);
-    this._padding = constant("5px");
+    this._padding = constant("10px");
     this._pointerEvents = constant("auto");
     this._popperClasses = {};
     this._position = d => [d.x, d.y];
@@ -66,12 +68,14 @@ export default class Tooltip extends BaseClass {
     };
     this._tbody = [];
     this._tbodyStyle = {
+      "color": colorDefaults.dark,
       "font-family": "'Roboto', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif",
       "font-size": "12px",
       "text-align": "center"
     };
     this._thead = [];
     this._theadStyle = {
+      "color": colorDefaults.dark,
       "font-family": "'Roboto', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif",
       "font-size": "12px",
       "font-weight": "600",
@@ -79,9 +83,11 @@ export default class Tooltip extends BaseClass {
     };
     this._title = accessor("title", "");
     this._titleStyle = {
+      "color": colorDefaults.dark,
       "font-family": "'Roboto', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif",
-      "font-size": "14px",
-      "font-weight": "600"
+      "font-size": "16px",
+      "font-weight": "600",
+      "margin-bottom": "5px"
     };
     this._trStyle = {
       "border-top": "1px solid rgba(0, 0, 0, 0.1)"
@@ -327,7 +333,7 @@ export default class Tooltip extends BaseClass {
   /**
       @memberof Tooltip
       @desc If *value* is specified, sets the background accessor to the specified function or string and returns this generator. If *value* is not specified, returns the current background accessor.
-      @param {Function|String} [*value* = "rgba(255, 255, 255, 0.75)"]
+      @param {Function|String} [*value* = "#f7f7f7"]
   */
   background(_) {
     return arguments.length ? (this._background = typeof _ === "function" ? _ : constant(_), this) : this._background;
