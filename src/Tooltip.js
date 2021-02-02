@@ -15,7 +15,7 @@ function generateReference(position = [0, 0]) {
     top: position[1],
     right: position[0],
     bottom: position[1],
-    left: position[0],
+    left: position[0]
   });
 }
 
@@ -277,7 +277,7 @@ export default class Tooltip extends BaseClass {
                   arrowElement.style.transform = `${arrowStyles.transform}rotate(45deg)`;
                   arrowElement.style.bottom = `-${arrowHeight / 2}px`;
                 }
-              },
+              }
             }
           ],
           removeOnDestroy: true
