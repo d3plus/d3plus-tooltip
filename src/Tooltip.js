@@ -191,7 +191,12 @@ export default class Tooltip extends BaseClass {
     tableEnter.append("thead").attr("class", "d3plus-tooltip-thead");
     const tableHead = update.select(".d3plus-tooltip-thead");
     stylize(tableHead, this._theadStyle);
-    const th = tableHead.selectAll("th").data(this._thead);
+    const theadTr = tableHead.selectAll("tr").data([0]);
+    const theadTrEnter = theadTr.enter().append("tr");
+    theadTr.exit().remove();
+    const theadTrUpdate = theadTr.merge(theadTrEnter);
+    stylize(theadTrUpdate, this._trStyle);
+    const th = theadTrUpdate.selectAll("th").data(this._thead);
     th.enter().append("th").merge(th).html(cellContent);
     th.exit().remove();
 
