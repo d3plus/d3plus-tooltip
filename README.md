@@ -15,41 +15,6 @@ If you use NPM, `npm install d3plus-tooltip`. Otherwise, download the [latest re
 </script>
 ```
 
-[width]: 205
-[height]: 135
-
-## Getting Started
-
-This module gives the ability to create tooltips in Javascript with no CSS required. It takes an array of [data](https://github.com/d3plus/d3plus-tooltip#Tooltip.data) just like most other [D3plus modules](https://github.com/d3plus), and creates a tooltip for each data point.
-
-In this example, and in the majority of use cases, only 1 tooltip is needed.
-
-```js
-var data = [
-  {"title": "D3plus Tooltip", "body": "Check out this cool table:", "x": 100, "y": 120, "label": "Position"}
-];
-
-new d3plus.Tooltip()
-  .data(data)
-  .thead(["Axis", function(d) { return d.label; }])
-  .tbody([
-    ["x", function(d) { return d.x; }],
-    ["y", function(d) { return d.y; }]
-  ])
-  .render();
-```
-
-
-[<kbd><img src="/example/getting-started.png" width="205px" /></kbd>](https://d3plus.org/examples/d3plus-tooltip/getting-started/)
-
-[Click here](https://d3plus.org/examples/d3plus-tooltip/getting-started/) to view this example live on the web.
-
-
-### More Examples
-
- * [Tooltip Anchored to an HTML Element](http://d3plus.org/examples/d3plus-tooltip/positioned-to-element/)
- * [Tooltip Following Mouse](http://d3plus.org/examples/d3plus-tooltip/following-mouse/)
-
 ## API Reference
 
 ##### 
@@ -453,4 +418,4 @@ This is a global function.
 
 
 
-###### <sub>Documentation generated on Thu, 23 Sep 2021 22:36:19 GMT</sub>
+###### <sub>Documentation generated on Thu, 28 Jul 2022 17:12:28 GMT</sub>
