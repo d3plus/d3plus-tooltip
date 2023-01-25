@@ -37,7 +37,7 @@
     "test": "eslint src test && mocha 'test/**/*-test.js'"
   },
   "devDependencies": {
-    "d3plus-dev": "^1.2.8"
+    "d3plus-dev": "^1.2.9"
   },
   "module": "es/index.js",
   "sideEffects": false,
