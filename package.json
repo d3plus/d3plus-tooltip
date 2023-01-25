@@ -2,7 +2,7 @@
   "name": "d3plus-tooltip",
   "version": "1.0.1",
   "description": "A javascript-only tooltip.",
-  "main": "build/d3plus-tooltip.full.js",
+  "main": "es/index.js",
   "jsnext:main": "es/index",
   "license": "MIT",
   "homepage": "https://d3plus.org",
@@ -23,24 +23,23 @@
     "url": "http://www.dave-landry.com"
   },
   "dependencies": {
-    "@popperjs/core": "^2.6.0",
-    "d3-selection": "^2.0.0",
-    "d3plus-color": "^1.0.0",
-    "d3plus-common": "^1.0.0"
+    "@popperjs/core": "^2.11.6",
+    "d3-selection": "^3.0.0",
+    "d3plus-color": "^1.1.2",
+    "d3plus-common": "^1.2.4"
   },
   "scripts": {
     "build": "d3plus-build",
     "dev": "d3plus-dev",
     "docs": "d3plus-docs",
     "env": "d3plus-env",
-    "examples": "d3plus-examples",
     "release": "d3plus-release",
-    "test": "d3plus-test"
+    "test": "eslint src test && mocha 'test/**/*-test.js'"
   },
   "devDependencies": {
-    "d3plus-dev": "^1.1.0"
+    "d3plus-dev": "^1.2.8"
   },
-  "module": "es/index",
+  "module": "es/index.js",
   "sideEffects": false,
   "files": [
     "bin",
@@ -48,5 +47,8 @@
     "build/d3plus-tooltip.js.map",
     "build/d3plus-tooltip.min.js",
     "es"
-  ]
+  ],
+  "jsdelivr": "build/d3plus-tooltip.full.min.js",
+  "unpkg": "build/d3plus-tooltip.full.min.js",
+  "type": "module"
 }

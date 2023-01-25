@@ -1,7 +1,7 @@
 import {select} from "d3-selection";
 import {colorDefaults} from "d3plus-color";
 import {accessor, BaseClass, constant, prefix, stylize} from "d3plus-common";
-import {createPopper} from "@popperjs/core/dist/esm/popper";
+import {createPopper} from "@popperjs/core/dist/esm";
 
 /**
  * Creates a reference element for popper.
