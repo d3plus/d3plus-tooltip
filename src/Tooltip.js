@@ -73,6 +73,7 @@ export default class Tooltip extends BaseClass {
     this._id = (d, i) => `${i}`;
     this._offset = constant(5);
     this._padding = constant("10px");
+    this._parent = "body";
     this._pointerEvents = constant("auto");
     this._popperClasses = {};
     this._position = d => [d.x, d.y];
@@ -120,7 +121,7 @@ export default class Tooltip extends BaseClass {
 
     const that = this;
 
-    const tooltips = select("body").selectAll(`.${this._className}`)
+    const tooltips = select(this._parent).selectAll(`.${this._className}`)
       .data(this._data, this._id);
 
     const enter = tooltips.enter().append("div")
@@ -492,6 +493,15 @@ function value(d, i) {
   */
   padding(_) {
     return arguments.length ? (this._padding = typeof _ === "function" ? _ : constant(_), this) : this._padding;
+  }
+
+  /**
+      @memberof Tooltip
+      @desc Sets the DOM element that the tooltip will be appended to.
+      @param {HTMLElement|String} [*value* = "body"]
+   */
+  parent(_) {
+    return arguments.length ? (this._parent = _, this) : this._parent;
   }
 
   /**
